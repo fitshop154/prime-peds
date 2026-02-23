@@ -1,80 +1,128 @@
-/* ── Prime Peds — script.js ── */
+/* ── Prime Peds Fitness — script.js ── */
 
 // ══════════════════════════════════════════
 // PRODUCT DATA
 // ══════════════════════════════════════════
 const PRODUCTS = [
   {
-    id: 1, name: 'Air Sprint Kids',       sub: 'Lightweight Running Shoe',   price: 34.99,
-    badge: 'Best Seller', category: 'running',
-    sizes: ['UK 1','UK 2','UK 3','UK 4','UK 5'],
-    img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop&q=80'
+    id: 1,
+    name: 'Whey Protein Isolate',
+    sub: 'Fast-absorbing lean muscle protein',
+    price: 34.99,
+    badge: 'Best Seller',
+    category: 'protein',
+    variants: ['Chocolate', 'Vanilla', 'Strawberry', 'Unflavoured'],
+    img: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 2, name: 'Mini Runner Pro',       sub: 'Toddler Trainer',            price: 29.99,
-    badge: null, category: 'running',
-    sizes: ['UK 6C','UK 7C','UK 8C','UK 9C','UK 10C'],
-    img: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=600&fit=crop&q=80'
+    id: 2,
+    name: 'Creatine Monohydrate',
+    sub: 'Pure micronised creatine 500g',
+    price: 19.99,
+    badge: null,
+    category: 'recovery',
+    variants: ['Unflavoured', 'Fruit Punch'],
+    img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 3, name: 'Cloud Step Jr',         sub: 'Everyday Comfort Trainer',   price: 39.99,
-    badge: 'New', category: 'casual',
-    sizes: ['UK 1','UK 2','UK 3','UK 4','UK 5'],
-    img: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop&q=80'
+    id: 3,
+    name: 'Pre-Workout Extreme',
+    sub: 'Maximum energy & focus blend',
+    price: 29.99,
+    badge: 'New',
+    category: 'pre-workout',
+    variants: ['Blue Raspberry', 'Fruit Punch', 'Watermelon', 'Tropical'],
+    img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 4, name: 'Flex Stride Kids',      sub: 'School PE Trainer',          price: 32.99,
-    badge: null, category: 'school',
-    sizes: ['UK 1','UK 2','UK 3','UK 4'],
-    img: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&h=600&fit=crop&q=80'
+    id: 4,
+    name: 'BCAA Recovery Blend',
+    sub: '2:1:1 amino acid ratio, 30 servings',
+    price: 24.99,
+    badge: null,
+    category: 'recovery',
+    variants: ['Tropical', 'Cherry Limeade', 'Green Apple'],
+    img: 'https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 5, name: 'Turbo Lace Juniors',    sub: 'Sport Performance',          price: 44.99,
-    badge: 'Popular', category: 'sport',
-    sizes: ['UK 2','UK 3','UK 4','UK 5','UK 6'],
-    img: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop&q=80'
+    id: 5,
+    name: 'Fat Burner Pro',
+    sub: 'Thermogenic weight management formula',
+    price: 39.99,
+    badge: 'Popular',
+    category: 'weight-loss',
+    variants: ['60 Capsules', '120 Capsules'],
+    img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 6, name: 'Velcro Flash Kids',     sub: 'Easy On / Easy Off',         price: 27.99,
-    badge: 'Toddler', category: 'casual',
-    sizes: ['UK 5C','UK 6C','UK 7C','UK 8C'],
-    img: 'https://images.unsplash.com/photo-1584735175315-9d5df23be30b?w=600&h=600&fit=crop&q=80'
+    id: 6,
+    name: 'Multivitamin Complex',
+    sub: '25 essential vitamins & minerals',
+    price: 17.99,
+    badge: null,
+    category: 'vitamins',
+    variants: ['30 Tablets', '60 Tablets', '90 Tablets'],
+    img: 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 7, name: 'Step Up Pro',           sub: 'Junior Basketball Shoe',     price: 49.99,
-    badge: 'New', category: 'sport',
-    sizes: ['UK 3','UK 4','UK 5','UK 6'],
-    img: 'https://images.unsplash.com/photo-1556048219-bb6978360b84?w=600&h=600&fit=crop&q=80'
+    id: 7,
+    name: 'Casein Protein Night',
+    sub: 'Slow-release overnight muscle repair',
+    price: 36.99,
+    badge: 'New',
+    category: 'protein',
+    variants: ['Chocolate', 'Vanilla', 'Banana'],
+    img: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 8, name: 'Little Legend Trainer', sub: 'Everyday Kids Trainer',      price: 36.99,
-    badge: null, category: 'casual',
-    sizes: ['UK 1','UK 2','UK 3','UK 4','UK 5'],
-    img: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&h=600&fit=crop&q=80'
+    id: 8,
+    name: 'Omega-3 Fish Oil',
+    sub: 'High-strength 1000mg EPA & DHA',
+    price: 14.99,
+    badge: null,
+    category: 'vitamins',
+    variants: ['60 Softgels', '120 Softgels'],
+    img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 9, name: 'Bounce Back Kids',      sub: 'Impact-Absorbing Sole',      price: 31.99,
-    badge: null, category: 'running',
-    sizes: ['UK 1','UK 2','UK 3','UK 4'],
-    img: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&h=600&fit=crop&q=80'
+    id: 9,
+    name: 'Glutamine Recovery',
+    sub: 'L-Glutamine 400g for muscle repair',
+    price: 22.99,
+    badge: null,
+    category: 'recovery',
+    variants: ['Unflavoured', 'Watermelon'],
+    img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 10, name: 'Speed Demon Jr',       sub: 'Track & Field Junior',       price: 42.99,
-    badge: 'Top Pick', category: 'sport',
-    sizes: ['UK 2','UK 3','UK 4','UK 5'],
-    img: 'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=600&h=600&fit=crop&q=80'
+    id: 10,
+    name: 'Mass Gainer Pro',
+    sub: 'High-calorie clean mass formula',
+    price: 44.99,
+    badge: 'Top Pick',
+    category: 'protein',
+    variants: ['Chocolate', 'Vanilla', 'Strawberry'],
+    img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 11, name: 'Soft Sole Toddler',   sub: 'First Steps Shoe',           price: 24.99,
-    badge: 'Toddler', category: 'casual',
-    sizes: ['UK 1C','UK 2C','UK 3C','UK 4C'],
-    img: 'https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=600&h=600&fit=crop&q=80'
+    id: 11,
+    name: 'Thermogenic Shred',
+    sub: 'Advanced cutting & energy formula',
+    price: 34.99,
+    badge: null,
+    category: 'weight-loss',
+    variants: ['60 Capsules', '120 Capsules'],
+    img: 'https://images.unsplash.com/photo-1579722820903-e3b507d8c110?w=600&h=600&fit=crop&q=80'
   },
   {
-    id: 12, name: 'Athletic Pro Kids',   sub: 'All-Round Performance',      price: 38.99,
-    badge: 'Best Seller', category: 'sport',
-    sizes: ['UK 1','UK 2','UK 3','UK 4','UK 5','UK 6'],
-    img: 'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=600&h=600&fit=crop&q=80'
+    id: 12,
+    name: 'Vitamin D3 + K2',
+    sub: 'Bone, immunity & testosterone support',
+    price: 12.99,
+    badge: null,
+    category: 'vitamins',
+    variants: ['30 Tablets', '60 Tablets', '90 Tablets'],
+    img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80'
   },
 ];
 
@@ -89,19 +137,19 @@ function saveCart(cart) {
   localStorage.setItem('pp_cart', JSON.stringify(cart));
   updateBadge();
 }
-function addToCart(productId, size) {
+function addToCart(productId, variant) {
   const cart = getCart();
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
-  const key = `${productId}-${size}`;
+  const key = `${productId}-${variant}`;
   const existing = cart.find(i => i.key === key);
   if (existing) {
     existing.qty++;
   } else {
-    cart.push({ key, productId, size, qty: 1, name: product.name, price: product.price, img: product.img });
+    cart.push({ key, productId, variant, qty: 1, name: product.name, price: product.price, img: product.img });
   }
   saveCart(cart);
-  showToast(`👟 ${product.name} added to cart!`, 'success');
+  showToast(`💪 ${product.name} added to cart!`, 'success');
 }
 function removeFromCart(key) {
   const cart = getCart().filter(i => i.key !== key);
@@ -139,24 +187,24 @@ function showToast(msg, type = '') {
 // ══════════════════════════════════════════
 // PRODUCT CARD HTML
 // ══════════════════════════════════════════
-function buildProductCard(p, showSizes = true) {
+function buildProductCard(p) {
   const badgeHTML = p.badge ? `<div class="product-badge">${p.badge}</div>` : '';
-  const sizesHTML = showSizes ? `
-    <div class="size-row" id="sizes-${p.id}">
-      ${p.sizes.map((s, i) => `<button class="size-btn${i === 0 ? ' selected' : ''}" data-size="${s}" onclick="selectSize(this,${p.id})">${s}</button>`).join('')}
-    </div>` : '';
+  const variantsHTML = `
+    <div class="size-row" id="variants-${p.id}">
+      ${p.variants.map((v, i) => `<button class="size-btn${i === 0 ? ' selected' : ''}" data-variant="${v}" onclick="selectVariant(this,${p.id})">${v}</button>`).join('')}
+    </div>`;
 
   return `
     <div class="product-card" data-id="${p.id}" data-cat="${p.category}">
       <div class="product-img-wrap">
         ${badgeHTML}
         <img src="${p.img}" alt="${p.name}" loading="lazy"
-             onerror="this.style.display='none'" />
+             onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1a3a,#111122)'" />
       </div>
       <div class="product-info">
         <div class="product-name">${p.name}</div>
         <div class="product-sub">${p.sub}</div>
-        ${sizesHTML}
+        ${variantsHTML}
         <div class="product-price-row">
           <div class="product-price">£${p.price.toFixed(2)}</div>
           <button class="product-add-btn" onclick="handleAddToCart(${p.id})">Add to Cart</button>
@@ -165,17 +213,16 @@ function buildProductCard(p, showSizes = true) {
     </div>`;
 }
 
-function selectSize(btn, productId) {
-  document.querySelectorAll(`#sizes-${productId} .size-btn`).forEach(b => b.classList.remove('selected'));
+function selectVariant(btn, productId) {
+  document.querySelectorAll(`#variants-${productId} .size-btn`).forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
 }
 
 function handleAddToCart(productId) {
-  const selectedSizeBtn = document.querySelector(`#sizes-${productId} .size-btn.selected`);
-  const size = selectedSizeBtn ? selectedSizeBtn.dataset.size : 'Standard';
-  addToCart(productId, size);
+  const selectedBtn = document.querySelector(`#variants-${productId} .size-btn.selected`);
+  const variant = selectedBtn ? selectedBtn.dataset.variant : 'Standard';
+  addToCart(productId, variant);
 
-  // Flash button
   const card = document.querySelector(`.product-card[data-id="${productId}"]`);
   if (card) {
     const btn = card.querySelector('.product-add-btn');
@@ -194,8 +241,8 @@ function handleAddToCart(productId) {
 function initFeatured() {
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
-  const featured = [PRODUCTS[0], PRODUCTS[2], PRODUCTS[4], PRODUCTS[11]];
-  grid.innerHTML = featured.map(p => buildProductCard(p, true)).join('');
+  const featured = [PRODUCTS[0], PRODUCTS[2], PRODUCTS[4], PRODUCTS[9]];
+  grid.innerHTML = featured.map(p => buildProductCard(p)).join('');
 }
 
 // ══════════════════════════════════════════
@@ -211,7 +258,7 @@ function initProductsPage() {
     const filtered = currentFilter === 'all'
       ? PRODUCTS
       : PRODUCTS.filter(p => p.category === currentFilter);
-    grid.innerHTML = filtered.map(p => buildProductCard(p, true)).join('');
+    grid.innerHTML = filtered.map(p => buildProductCard(p)).join('');
   }
 
   document.querySelectorAll('.filter-tab').forEach(tab => {
@@ -252,7 +299,7 @@ function initCheckout() {
         <img class="cart-item-img" src="${item.img}" alt="${item.name}" onerror="this.style.background='#1a2040'">
         <div>
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-sub">Size: ${item.size} &nbsp;·&nbsp; Qty: ${item.qty}</div>
+          <div class="cart-item-sub">${item.variant} &nbsp;·&nbsp; Qty: ${item.qty}</div>
         </div>
         <div class="cart-item-price">£${(item.price * item.qty).toFixed(2)}</div>
         <button class="cart-item-remove" onclick="removeItem('${item.key}')" aria-label="Remove">×</button>
@@ -280,7 +327,6 @@ function initCheckout() {
 
   renderCart();
 
-  // Checkout form submit
   const form = document.getElementById('checkout-form');
   if (form) {
     form.addEventListener('submit', function (e) {
