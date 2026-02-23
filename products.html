@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products — Prime Peds</title>
+  <meta name="description" content="Browse our full range of premium kids' trainers and shoes." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Prime<em>Peds</em></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="checkout.html" class="basket-nav-link">
+          🛒 Cart <span class="basket-badge" id="basket-badge" style="display:none">0</span>
+        </a></li>
+      </ul>
+      <button class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ── Page Hero ── -->
+  <section class="page-hero">
+    <h1>👟 Our Products</h1>
+    <p>Premium kids' trainers for every occasion — school, sport, and everything in between.</p>
+  </section>
+
+  <!-- ── Products Section ── -->
+  <section class="section">
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All Shoes</button>
+      <button class="filter-tab" data-filter="running">Running</button>
+      <button class="filter-tab" data-filter="sport">Sport</button>
+      <button class="filter-tab" data-filter="casual">Casual</button>
+      <button class="filter-tab" data-filter="school">School</button>
+    </div>
+
+    <!-- Grid — filled by script.js -->
+    <div class="products-grid" id="products-grid"></div>
+
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Prime<em>Peds</em></a>
+          <p>Premium kids' trainers and shoes for every adventure. Comfort and style from the very first step.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="checkout.html">Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Prime Peds. All rights reserved. Built for little champions everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Prime Peds</title>
+  <meta name="description" content="Complete your order at Prime Peds." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Prime<em>Peds</em></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="checkout.html" class="basket-nav-link active">
+          🛒 Cart <span class="basket-badge" id="basket-badge" style="display:none">0</span>
+        </a></li>
+      </ul>
+      <button class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ── Order Success (hidden until form submitted) ── -->
+  <div id="order-success" style="display:none;padding:2rem 1.5rem">
+    <div class="order-confirm">
+      <div class="order-confirm-icon">🎉</div>
+      <h2>Order Placed!</h2>
+      <p>Thank you for shopping with Prime Peds. You'll receive a confirmation email shortly with your order details and tracking information.</p>
+      <a href="products.html" class="btn btn-primary">Continue Shopping →</a>
+    </div>
+  </div>
+
+  <!-- ── Checkout Page ── -->
+  <div id="checkout-page">
+    <section class="page-hero">
+      <h1>🛒 Checkout</h1>
+      <p>Complete your order below — fast, secure, and simple.</p>
+    </section>
+
+    <section class="section" style="padding-top:2.5rem">
+      <div class="checkout-layout">
+
+        <!-- Left: Checkout Form -->
+        <div>
+          <form id="checkout-form">
+
+            <!-- Contact -->
+            <div class="checkout-form-wrap" style="margin-bottom:1.5rem">
+              <div class="checkout-section-title">📋 Contact Information</div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="first-name">First Name</label>
+                  <input type="text" id="first-name" placeholder="John" required />
+                </div>
+                <div class="form-group">
+                  <label for="last-name">Last Name</label>
+                  <input type="text" id="last-name" placeholder="Smith" required />
+                </div>
+                <div class="form-group span-2">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" placeholder="john@example.com" required />
+                </div>
+                <div class="form-group span-2">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" placeholder="+44 7700 900000" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Shipping -->
+            <div class="checkout-form-wrap" style="margin-bottom:1.5rem">
+              <div class="checkout-section-title">📦 Shipping Address</div>
+              <div class="form-grid">
+                <div class="form-group span-2">
+                  <label for="address">Street Address</label>
+                  <input type="text" id="address" placeholder="123 Example Street" required />
+                </div>
+                <div class="form-group span-2">
+                  <label for="address2">Apartment / Unit (Optional)</label>
+                  <input type="text" id="address2" placeholder="Flat 2B" />
+                </div>
+                <div class="form-group">
+                  <label for="city">City / Town</label>
+                  <input type="text" id="city" placeholder="London" required />
+                </div>
+                <div class="form-group">
+                  <label for="postcode">Postcode</label>
+                  <input type="text" id="postcode" placeholder="SW1A 1AA" required />
+                </div>
+                <div class="form-group span-2">
+                  <label for="country">Country</label>
+                  <select id="country">
+                    <option value="gb" selected>United Kingdom</option>
+                    <option value="ie">Ireland</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="au">Australia</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment -->
+            <div class="checkout-form-wrap">
+              <div class="checkout-section-title">💳 Payment Details</div>
+              <div class="form-grid">
+                <div class="form-group span-2">
+                  <label for="card-name">Name on Card</label>
+                  <input type="text" id="card-name" placeholder="John Smith" required />
+                </div>
+                <div class="form-group span-2">
+                  <label for="card-number">Card Number</label>
+                  <input type="text" id="card-number" placeholder="1234 5678 9012 3456"
+                    maxlength="19"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'').replace(/(.{4})/g,'$1 ').trim()"
+                    required />
+                </div>
+                <div class="form-group">
+                  <label for="expiry">Expiry Date</label>
+                  <input type="text" id="expiry" placeholder="MM / YY" maxlength="7"
+                    oninput="formatExpiry(this)" required />
+                </div>
+                <div class="form-group">
+                  <label for="cvv">CVV</label>
+                  <input type="text" id="cvv" placeholder="123" maxlength="4"
+                    oninput="this.value=this.value.replace(/\D/g,'')" required />
+                </div>
+              </div>
+              <div style="margin-top:1.5rem">
+                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1.05rem;padding:1rem">
+                  🔒 Place Order Securely
+                </button>
+              </div>
+              <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-top:0.8rem">
+                🔒 Your payment details are encrypted and secure. We never store card information.
+              </p>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Right: Cart Summary -->
+        <div>
+          <div class="cart-summary-wrap">
+            <div class="checkout-section-title">🛍️ Order Summary</div>
+            <div id="cart-items-wrap"></div>
+            <div id="cart-totals"></div>
+          </div>
+
+          <!-- Trust badges -->
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;margin-top:1.2rem">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;text-align:center">
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:0.25rem">🚚</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:600">Free Delivery</div>
+                <div style="font-size:0.72rem;color:var(--muted)">Orders over £50</div>
+              </div>
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:0.25rem">🔄</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:600">Free Returns</div>
+                <div style="font-size:0.72rem;color:var(--muted)">30-day returns</div>
+              </div>
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:0.25rem">🔒</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:600">Secure Payment</div>
+                <div style="font-size:0.72rem;color:var(--muted)">256-bit SSL</div>
+              </div>
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:0.25rem">⭐</div>
+                <div style="font-size:0.78rem;color:var(--white);font-weight:600">5-Star Rated</div>
+                <div style="font-size:0.72rem;color:var(--muted)">547 reviews</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Prime<em>Peds</em></a>
+          <p>Premium kids' trainers and shoes for every adventure. Comfort and style from the very first step.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="checkout.html">Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Prime Peds. All rights reserved. Built for little champions everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatExpiry(input) {
+      var v = input.value.replace(/\D/g, '').slice(0, 4);
+      if (v.length >= 3) v = v.slice(0, 2) + ' / ' + v.slice(2);
+      input.value = v;
+    }
+  </script>
+</body>
+</html>

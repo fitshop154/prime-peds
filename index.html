@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Peds — Kids' Trainers & Shoes</title>
+  <meta name="description" content="Premium kids' trainers and shoes. Comfort, style, and durability for every step." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Prime<em>Peds</em></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="checkout.html" class="basket-nav-link">
+          🛒 Cart <span class="basket-badge" id="basket-badge" style="display:none">0</span>
+        </a></li>
+      </ul>
+      <button class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-badge">👟 New Collection 2026</div>
+      <h1 class="hero-title">
+        Built for <span class="accent">Little Champions</span>
+      </h1>
+      <p class="hero-tagline">
+        Premium kids' trainers that keep up with every run, jump, and adventure. Comfort and style, every step of the way.
+      </p>
+      <div class="hero-btns">
+        <a href="products.html" class="btn btn-primary">Shop Now →</a>
+        <a href="reviews.html" class="btn btn-outline">See Reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features Strip ── -->
+  <div class="features-strip">
+    <div class="features-strip-inner">
+      <div class="feat-item">
+        <div class="feat-icon">🚚</div>
+        <div class="feat-title">Free Delivery</div>
+        <div class="feat-desc">On all orders over £50</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">🔄</div>
+        <div class="feat-title">Easy Returns</div>
+        <div class="feat-desc">30-day hassle-free returns</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">👟</div>
+        <div class="feat-title">Premium Quality</div>
+        <div class="feat-desc">Durable soles & soft linings</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">⭐</div>
+        <div class="feat-title">5-Star Rated</div>
+        <div class="feat-desc">Loved by parents & kids</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Featured Products ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Top Picks</div>
+      <h2 class="section-title">Featured Products</h2>
+    </div>
+    <div class="products-grid" id="featured-grid">
+      <!-- Filled by script.js -->
+    </div>
+    <div style="text-align:center;margin-top:2.5rem">
+      <a href="products.html" class="btn btn-outline">View All Products →</a>
+    </div>
+  </section>
+
+  <!-- ── Why Prime Peds ── -->
+  <section class="features-strip" style="padding:4rem 1.5rem">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="section-header" style="margin-bottom:2.5rem">
+        <div class="section-label">Why Us</div>
+        <h2 class="section-title">Why Choose Prime Peds?</h2>
+      </div>
+      <div class="features-strip-inner" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem">
+        <div class="feat-item" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem">
+          <div class="feat-icon" style="font-size:2.2rem">🧒</div>
+          <div class="feat-title" style="font-size:1rem;margin-bottom:0.4rem">Designed for Kids</div>
+          <div class="feat-desc" style="font-size:0.85rem">Every shoe is engineered around growing feet — flexible, supportive, and fun.</div>
+        </div>
+        <div class="feat-item" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem">
+          <div class="feat-icon" style="font-size:2.2rem">💪</div>
+          <div class="feat-title" style="font-size:1rem;margin-bottom:0.4rem">Built to Last</div>
+          <div class="feat-desc" style="font-size:0.85rem">Reinforced toe caps and durable outsoles that survive the playground.</div>
+        </div>
+        <div class="feat-item" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem">
+          <div class="feat-icon" style="font-size:2.2rem">🎨</div>
+          <div class="feat-title" style="font-size:1rem;margin-bottom:0.4rem">Stylish Designs</div>
+          <div class="feat-desc" style="font-size:0.85rem">Bold colours and modern styles kids actually want to wear.</div>
+        </div>
+        <div class="feat-item" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem">
+          <div class="feat-icon" style="font-size:2.2rem">💷</div>
+          <div class="feat-title" style="font-size:1rem;margin-bottom:0.4rem">Great Value</div>
+          <div class="feat-desc" style="font-size:0.85rem">Premium quality without the premium price tag. Starting from £24.99.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Reviews Teaser ── -->
+  <section class="section" style="text-align:center;padding-top:4rem;padding-bottom:4rem">
+    <div class="section-label">Happy Customers</div>
+    <h2 class="section-title" style="margin-bottom:1rem">Parents Love Prime Peds</h2>
+    <p style="color:var(--muted);max-width:480px;margin:0 auto 2rem">
+      Over 500 five-star reviews from families across the UK. See what parents and kids are saying.
+    </p>
+    <div style="display:flex;gap:0.4rem;justify-content:center;font-size:1.4rem;margin-bottom:1.5rem">
+      ⭐⭐⭐⭐⭐
+    </div>
+    <a href="reviews.html" class="btn btn-primary">Read All Reviews</a>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Prime<em>Peds</em></a>
+          <p>Premium kids' trainers and shoes for every adventure. Comfort and style from the very first step.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="checkout.html">Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Prime Peds. All rights reserved. Built for little champions everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
