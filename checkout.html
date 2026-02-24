@@ -51,12 +51,54 @@
   </header>
 
   <!-- ── Order Success (hidden until form submitted) ── -->
-  <div id="order-success" style="display:none;padding:2rem 1.5rem">
-    <div class="order-confirm">
-      <div class="order-confirm-icon">🎉</div>
-      <h2>Order Placed!</h2>
-      <p>Thank you for shopping with Prime Peds. You'll receive a confirmation email shortly with your order details and tracking information.</p>
-      <a href="products.html" class="btn btn-primary">Continue Shopping →</a>
+  <div id="order-success" style="display:none">
+    <div class="order-confirm-wrap">
+
+      <!-- Header -->
+      <div class="order-confirm-header">
+        <div class="order-confirm-tick">✓</div>
+        <h2>Order Confirmed!</h2>
+        <p>Thank you, <strong id="confirm-name"></strong>! Your order has been placed and is being processed.</p>
+        <div class="order-number-badge">Order #<span id="confirm-order-num"></span></div>
+      </div>
+
+      <!-- Info grid -->
+      <div class="order-info-grid">
+        <div class="order-info-box">
+          <div class="order-info-label">📅 Order Date</div>
+          <div class="order-info-value" id="confirm-date"></div>
+        </div>
+        <div class="order-info-box">
+          <div class="order-info-label">🚚 Est. Delivery</div>
+          <div class="order-info-value" id="confirm-delivery"></div>
+          <div class="order-info-sub">Tracked 24</div>
+        </div>
+        <div class="order-info-box">
+          <div class="order-info-label">💳 Payment</div>
+          <div class="order-info-value">Confirmed ✓</div>
+          <div class="order-info-sub">Card ending <span id="confirm-card"></span></div>
+        </div>
+        <div class="order-info-box">
+          <div class="order-info-label">📧 Receipt sent to</div>
+          <div class="order-info-value order-info-email" id="confirm-email"></div>
+        </div>
+      </div>
+
+      <!-- Items ordered -->
+      <div class="order-confirm-section">
+        <div class="order-confirm-section-title">🛍️ Items Ordered</div>
+        <div id="confirm-items"></div>
+      </div>
+
+      <!-- Order totals -->
+      <div id="confirm-totals" class="order-confirm-totals"></div>
+
+      <!-- Footer CTA -->
+      <div class="order-confirm-footer">
+        <p>We'll send tracking information to your email once your order has been dispatched. Expected delivery within 1–3 business days.</p>
+        <a href="products.html" class="btn btn-primary" style="margin-top:1.2rem">Continue Shopping →</a>
+      </div>
+
     </div>
   </div>
 

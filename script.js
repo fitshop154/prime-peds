@@ -273,10 +273,61 @@ function initCheckout() {
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (getCart().length === 0) {
+      const cart = getCart();
+      if (cart.length === 0) {
         showToast('Your cart is empty!', 'error');
         return;
       }
+
+      // Grab form values
+      const firstName = document.getElementById('first-name').value.trim();
+      const lastName  = document.getElementById('last-name').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const cardRaw   = document.getElementById('card-number').value.replace(/\s/g, '');
+      const cardLast4 = cardRaw.slice(-4) || '****';
+
+      // Generate order number & calculate dates
+      const orderNum  = 'PP-' + Math.random().toString(36).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+      const orderDate = new Date();
+      const delivDate = new Date(orderDate);
+      let added = 0;
+      while (added < 3) {
+        delivDate.setDate(delivDate.getDate() + 1);
+        const d = delivDate.getDay();
+        if (d !== 0 && d !== 6) added++;
+      }
+      const shortFmt = { day: 'numeric', month: 'short', year: 'numeric' };
+      const longFmt  = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+
+      // Totals
+      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const shipping = 5.00;
+      const total    = subtotal + shipping;
+
+      // Populate confirmation screen
+      document.getElementById('confirm-name').textContent      = firstName + ' ' + lastName;
+      document.getElementById('confirm-order-num').textContent = orderNum;
+      document.getElementById('confirm-email').textContent     = email;
+      document.getElementById('confirm-card').textContent      = cardLast4;
+      document.getElementById('confirm-date').textContent      = orderDate.toLocaleDateString('en-GB', shortFmt);
+      document.getElementById('confirm-delivery').textContent  = delivDate.toLocaleDateString('en-GB', longFmt);
+
+      document.getElementById('confirm-items').innerHTML = cart.map(item => `
+        <div class="confirm-item">
+          <img class="confirm-item-img" src="${item.img}" alt="${item.name}" onerror="this.style.background='#1a2040'">
+          <div class="confirm-item-info">
+            <div class="confirm-item-name">${item.name}</div>
+            <div class="confirm-item-sub">${item.variant} &nbsp;·&nbsp; Qty: ${item.qty}</div>
+          </div>
+          <div class="confirm-item-price">£${(item.price * item.qty).toFixed(2)}</div>
+        </div>`).join('');
+
+      document.getElementById('confirm-totals').innerHTML = `
+        <div class="cart-total-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
+        <div class="cart-total-row"><span>Tracked 24 Shipping</span><span>£${shipping.toFixed(2)}</span></div>
+        <div class="cart-total-row grand"><span>Total Paid</span><span>£${total.toFixed(2)}</span></div>`;
+
+      // Clear cart and switch views
       saveCart([]);
       document.getElementById('checkout-page').style.display = 'none';
       document.getElementById('order-success').style.display = 'block';

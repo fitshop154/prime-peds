@@ -968,18 +968,148 @@ footer {
 /* ══════════════════════════════════════════
    ORDER CONFIRMATION
 ══════════════════════════════════════════ */
-.order-confirm {
-  background: var(--bg-card);
-  border: 1px solid rgba(22,163,74,0.35);
-  border-radius: var(--radius);
-  padding: 3rem 2rem;
-  text-align: center;
-  max-width: 520px;
-  margin: 3rem auto;
+.order-confirm-wrap {
+  max-width: 680px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem 3rem;
 }
-.order-confirm-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-.order-confirm h2  { font-size: 1.7rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
-.order-confirm p   { color: var(--muted); margin-bottom: 1.5rem; }
+
+/* Header */
+.order-confirm-header {
+  text-align: center;
+  padding: 2.5rem 2rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(22,163,74,0.30);
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+}
+.order-confirm-tick {
+  width: 64px;
+  height: 64px;
+  background: rgba(22,163,74,0.15);
+  border: 2px solid rgba(22,163,74,0.55);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #22c55e;
+  margin: 0 auto 1.2rem;
+}
+.order-confirm-header h2 {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.order-confirm-header p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.2rem; }
+.order-confirm-header strong { color: var(--white); }
+.order-number-badge {
+  display: inline-block;
+  background: var(--blue-dim);
+  border: 1px solid rgba(37,99,235,0.40);
+  color: var(--blue-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.35rem 1.1rem;
+  border-radius: 50px;
+  letter-spacing: 0.05em;
+}
+
+/* Info grid */
+.order-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(22,163,74,0.30);
+  border-top: none;
+  border-bottom: none;
+  background: var(--bg-card);
+}
+.order-info-box {
+  padding: 1.2rem 1.5rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.order-info-box:nth-child(even) { border-right: none; }
+.order-info-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.4rem;
+}
+.order-info-value {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+.order-info-email {
+  font-size: 0.82rem;
+  word-break: break-all;
+}
+.order-info-sub { font-size: 0.76rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* Items & totals section */
+.order-confirm-section {
+  background: var(--bg-card);
+  border: 1px solid rgba(22,163,74,0.30);
+  border-top: none;
+  border-bottom: none;
+  padding: 1.5rem;
+}
+.order-confirm-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+.confirm-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.confirm-item:last-child { border-bottom: none; }
+.confirm-item-img {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-xs);
+  object-fit: cover;
+  background: var(--bg-elevated);
+  flex-shrink: 0;
+}
+.confirm-item-name { font-size: 0.9rem; font-weight: 600; color: var(--white); }
+.confirm-item-sub  { font-size: 0.77rem; color: var(--muted); margin-top: 2px; }
+.confirm-item-price { font-size: 0.92rem; font-weight: 700; color: var(--blue-light); margin-left: auto; flex-shrink: 0; }
+
+.order-confirm-totals {
+  background: var(--bg-card);
+  border: 1px solid rgba(22,163,74,0.30);
+  border-top: none;
+  border-bottom: none;
+  padding: 0 1.5rem 0.5rem;
+}
+
+/* Footer */
+.order-confirm-footer {
+  background: var(--bg-card);
+  border: 1px solid rgba(22,163,74,0.30);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+}
+.order-confirm-footer p { font-size: 0.85rem; color: var(--muted); }
+
+@media (max-width: 600px) {
+  .order-info-grid { grid-template-columns: 1fr; }
+  .order-info-box { border-right: none; }
+}
 
 /* ══════════════════════════════════════════
    ANIMATIONS
