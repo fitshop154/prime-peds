@@ -76,6 +76,7 @@ const PRODUCTS = [
   { id: 44, name: 'DHC',             sub: '30mgx100',                                     price: 100,  badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 45, name: 'ACF',    sub: '20mg 10x1x10',                                 price: 55,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 46, name: 'TUC',     sub: '3x10 cap',                                     price: 45,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 47, name: 'Vitamin INS LAN', sub: '',                                     price: 30,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
 ];
 
 // ══════════════════════════════════════════
