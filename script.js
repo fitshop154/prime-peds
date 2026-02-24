@@ -306,7 +306,7 @@ function initCheckout() {
       </div>`).join('');
 
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const shipping = subtotal >= 50 ? 0 : 3.99;
+    const shipping = 3.99;
     const total    = subtotal + shipping;
 
     const totalsEl = document.getElementById('cart-totals');
@@ -314,7 +314,7 @@ function initCheckout() {
       totalsEl.innerHTML = `
         <div class="cart-totals">
           <div class="cart-total-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
-          <div class="cart-total-row"><span>Shipping</span><span>${shipping === 0 ? 'FREE' : '£' + shipping.toFixed(2)}</span></div>
+          <div class="cart-total-row"><span>Shipping</span><span>£${shipping.toFixed(2)}</span></div>
           <div class="cart-total-row grand"><span>Total</span><span>£${total.toFixed(2)}</span></div>
         </div>`;
     }
