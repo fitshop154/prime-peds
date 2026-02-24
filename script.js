@@ -337,6 +337,64 @@ function initCheckout() {
 }
 
 // ══════════════════════════════════════════
+// AGE GATE
+// ══════════════════════════════════════════
+function initAgeGate() {
+  // Already verified this session
+  if (sessionStorage.getItem('pp_age_ok') === '1') return;
+
+  const loadTime = Date.now();
+
+  // Build overlay
+  const gate = document.createElement('div');
+  gate.id = 'age-gate';
+  gate.innerHTML = `
+    <div class="age-gate-box">
+      <div class="age-gate-logo">Prime<em>Peds</em></div>
+      <div class="age-gate-icon">🔞</div>
+      <h2>Age Verification Required</h2>
+      <p>This website contains research products intended for adults only. You must be 18 years of age or older to enter.</p>
+
+      <!-- Honeypot: hidden from humans, bots fill this automatically -->
+      <input class="age-gate-honeypot" id="age-hp" type="text" name="website" autocomplete="off" tabindex="-1">
+
+      <label class="age-gate-label" for="age-cb">
+        <input type="checkbox" id="age-cb">
+        <span>I confirm that I am 18 years of age or older</span>
+      </label>
+
+      <button class="btn btn-primary age-gate-enter" id="age-enter" disabled>Enter Site →</button>
+      <a href="https://www.google.com" class="age-gate-exit">I am under 18 — Exit</a>
+      <p class="age-gate-note">By entering this site you confirm you are of legal age and accept our terms of use. This site is intended for research purposes only.</p>
+    </div>`;
+
+  document.body.prepend(gate);
+  document.body.style.overflow = 'hidden';
+
+  const cb       = document.getElementById('age-cb');
+  const enterBtn = document.getElementById('age-enter');
+  const honeypot = document.getElementById('age-hp');
+
+  cb.addEventListener('change', () => {
+    enterBtn.disabled = !cb.checked;
+  });
+
+  enterBtn.addEventListener('click', () => {
+    // Bot checks: honeypot filled OR submitted too fast (under 1.2s)
+    if (honeypot.value !== '') return;
+    if (Date.now() - loadTime < 1200) return;
+    if (!cb.checked) return;
+
+    sessionStorage.setItem('pp_age_ok', '1');
+    gate.style.animation = 'ageGateOut 0.35s ease forwards';
+    setTimeout(() => {
+      gate.remove();
+      document.body.style.overflow = '';
+    }, 350);
+  });
+}
+
+// ══════════════════════════════════════════
 // HAMBURGER NAV
 // ══════════════════════════════════════════
 function initNav() {
@@ -353,6 +411,7 @@ function initNav() {
 // INIT
 // ══════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function () {
+  initAgeGate();
   initNav();
   updateBadge();
   initFeatured();
