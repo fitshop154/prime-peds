@@ -62,7 +62,7 @@ const PRODUCTS = [
   { id: 30, name: 'Vitamin T100',     sub: 'Vitamin B1 100mg',                   price: 150,  badge: null,      category: 'weight-loss', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 31, name: 'Vitamin R30',      sub: '',                                   price: 110,  badge: null,      category: 'weight-loss', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 32, name: 'Vitamin Z10',      sub: '',                                   price: 45,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 33, name: 'X1mgX30',          sub: 'Xylitol',                            price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 33, name: 'X1mg',             sub: 'Xylitol',                            price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
 ];
 
 // ══════════════════════════════════════════
