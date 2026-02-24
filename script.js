@@ -4,36 +4,66 @@
 // PRODUCT DATA
 // ══════════════════════════════════════════
 const PRODUCTS = [
-  { id: 1,  name: 'BPC-157 5mg',        sub: 'Body Protection Compound',          price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
-  { id: 2,  name: 'TB500 5mg',          sub: 'Thymosin Beta-4',                    price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
-  { id: 3,  name: 'GHK-Cu 50mg',        sub: 'Copper Peptide',                     price: 35,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 4,  name: 'Glow70',             sub: 'Glow Peptide Blend 70mg',            price: 50,  badge: 'Popular',   category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
-  { id: 5,  name: 'IGF-1-LR3 1mg',      sub: 'Insulin-like Growth Factor',         price: 50,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
-  { id: 6,  name: 'GHRP-6 5mg',         sub: 'Growth Hormone Releasing Peptide 6', price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
-  { id: 7,  name: 'HGH Fragment 5mg',   sub: 'HGH Fragment 176-191',               price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
-  { id: 8,  name: 'CJC No DAC 5mg',     sub: 'CJC-1295 Without DAC',               price: 35,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 9,  name: 'CJC With DAC 5mg',   sub: 'CJC-1295 With DAC',                  price: 45,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
-  { id: 10, name: 'Ipamorelin 10mg',    sub: 'GH Secretagogue Peptide',            price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
-  { id: 11, name: 'Tesamorelin 10mg',   sub: 'GHRH Analogue Peptide',              price: 60,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
-  { id: 12, name: 'Epithalon 10mg',     sub: 'Telomere Peptide',                   price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
-  { id: 13, name: 'MOTS-C10 10mg',      sub: 'Mitochondrial Peptide 10mg',         price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 14, name: 'MOTS-C40 40mg',      sub: 'Mitochondrial Peptide 40mg',         price: 65,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
-  { id: 15, name: 'DSIP 5mg',           sub: 'Delta Sleep-Inducing Peptide',       price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
-  { id: 16, name: 'Selank 5mg',         sub: 'Anxiolytic Nootropic Peptide',       price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
-  { id: 17, name: 'Semax 5mg',          sub: 'Cognitive Nootropic Peptide',        price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
-  { id: 18, name: 'SLU-PP-332 5mg',     sub: 'ERR Agonist Research Compound',      price: 75,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 19, name: 'L-Carnitine 10mg',   sub: 'Amino Acid Metabolic Support',       price: 75,  badge: 'Popular',   category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
-  { id: 20, name: 'AOD 5mg',            sub: 'AOD-9604 HGH Fragment',              price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
-  { id: 21, name: 'PT-141 10mg',        sub: 'Bremelanotide Peptide',              price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
-  { id: 22, name: 'SS-31 10mg',         sub: 'Mitochondria-Targeted Peptide',      price: 35,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
-  { id: 23, name: 'Thymalin 10mg',      sub: 'Thymic Peptide',                     price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 24, name: 'KPV 10mg',           sub: 'Anti-Inflammatory Tripeptide',       price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
-  { id: 25, name: 'NAD500',             sub: 'NAD+ 500mg',                         price: 50,   badge: 'Popular',   category: 'peptides', variants: ['1 Vial'],   img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
-  { id: 26, name: 'Bac Water 3ml',     sub: 'Bacteriostatic Water for Reconstitution', price: 2.50, badge: null,      category: 'peptides', variants: ['1 Vial'],   img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 27, name: 'Vitamin S10',    sub: 'Vitamin Blend',        price: 45,  badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 28, name: 'Vitamin T30',   sub: 'Vitamin B1 30mg',      price: 90,  badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 29, name: 'Vitamin T60',   sub: 'Vitamin B1 60mg',      price: 110, badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 30, name: 'Vitamin T100',  sub: 'Vitamin B1 100mg',     price: 150, badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 1,  name: 'BPC-157 5mg',      sub: 'Body Protection Compound',           price: 20,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80',
+    desc: 'Supports tissue repair, gut lining integrity, and joint healing. Recommended: 250–500mcg daily, subcutaneous injection, 4–6 week cycle.' },
+  { id: 2,  name: 'TB500 5mg',        sub: 'Thymosin Beta-4',                    price: 25,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80',
+    desc: 'Promotes systemic healing, reduces inflammation, and supports flexibility and recovery. Recommended: 2–2.5mg twice weekly (4–6 week loading), then 2mg monthly.' },
+  { id: 3,  name: 'GHK-Cu 50mg',      sub: 'Copper Peptide',                     price: 35,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Stimulates collagen synthesis, skin regeneration, and wound repair. Recommended: 1–2mg daily, subcutaneous injection or topical, 4–8 week cycle.' },
+  { id: 4,  name: 'Glow70',           sub: 'Glow Peptide Blend 70mg',            price: 50,   badge: 'Popular', category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80',
+    desc: 'Proprietary peptide blend targeting skin health, collagen production, and radiance enhancement. Recommended: 1–2mg daily, subcutaneous injection, 6–8 week cycle.' },
+  { id: 5,  name: 'IGF-1-LR3 1mg',    sub: 'Insulin-like Growth Factor',         price: 50,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80',
+    desc: 'Long-acting IGF-1 analogue supporting lean muscle growth and cellular repair. Recommended: 20–50mcg daily post-workout, subcutaneous injection, 4 weeks on / 4 weeks off.' },
+  { id: 6,  name: 'GHRP-6 5mg',       sub: 'Growth Hormone Releasing Peptide 6', price: 20,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80',
+    desc: 'Stimulates GH secretion and increases appetite, commonly stacked with a GHRH peptide. Recommended: 100–300mcg per dose, 2–3 times daily fasted, subcutaneous injection.' },
+  { id: 7,  name: 'HGH Fragment 5mg', sub: 'HGH Fragment 176-191',               price: 25,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80',
+    desc: 'Modified GH fragment 176–191 targeting fat metabolism without affecting blood sugar or growth. Recommended: 250–500mcg in 2 daily doses fasted, subcutaneous injection, 8–12 week cycle.' },
+  { id: 8,  name: 'CJC No DAC 5mg',   sub: 'CJC-1295 Without DAC',               price: 35,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Short-acting GHRH analogue producing pulsatile GH release with minimal desensitisation. Recommended: 100–200mcg per dose, 2–3 times daily, subcutaneous injection.' },
+  { id: 9,  name: 'CJC With DAC 5mg', sub: 'CJC-1295 With DAC',                  price: 45,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80',
+    desc: 'Long-acting GHRH analogue providing sustained GH elevation with once-weekly dosing. Recommended: 1–2mg once weekly, subcutaneous injection, 8–12 week cycle.' },
+  { id: 10, name: 'Ipamorelin 10mg',  sub: 'GH Secretagogue Peptide',            price: 30,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80',
+    desc: 'Selective GH secretagogue with minimal cortisol or prolactin side effects. Recommended: 200–300mcg per dose, 2–3 times daily, subcutaneous injection.' },
+  { id: 11, name: 'Tesamorelin 10mg', sub: 'GHRH Analogue Peptide',              price: 60,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80',
+    desc: 'GHRH analogue studied for GH stimulation and visceral fat reduction. Recommended: 1–2mg once daily, subcutaneous injection, 12–26 week cycle.' },
+  { id: 12, name: 'Epithalon 10mg',   sub: 'Telomere Peptide',                   price: 30,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80',
+    desc: 'Telomere-regulating tetrapeptide studied for longevity and anti-ageing support. Recommended: 5–10mg daily, subcutaneous injection, 10–20 day cycle, 2–3 times per year.' },
+  { id: 13, name: 'MOTS-C10 10mg',    sub: 'Mitochondrial Peptide 10mg',         price: 25,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Mitochondrial-derived peptide improving metabolic function and insulin sensitivity. Recommended: 5–10mg per dose, 2–3 times weekly, subcutaneous injection.' },
+  { id: 14, name: 'MOTS-C40 40mg',    sub: 'Mitochondrial Peptide 40mg',         price: 65,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80',
+    desc: 'High-dose MOTS-C for enhanced metabolic support, endurance, and energy regulation. Recommended: 10–15mg per dose, 2–3 times weekly, subcutaneous injection.' },
+  { id: 15, name: 'DSIP 5mg',         sub: 'Delta Sleep-Inducing Peptide',       price: 30,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80',
+    desc: 'Modulates sleep architecture and reduces cortisol and stress hormone levels. Recommended: 200–400mcg before sleep, subcutaneous injection, 5–7 day cycles.' },
+  { id: 16, name: 'Selank 5mg',       sub: 'Anxiolytic Nootropic Peptide',       price: 20,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80',
+    desc: 'Reduces anxiety and enhances cognitive clarity without sedative effects. Recommended: 250–500mcg per dose, 1–2 times daily, intranasal or subcutaneous, 1–3 week cycle.' },
+  { id: 17, name: 'Semax 5mg',        sub: 'Cognitive Nootropic Peptide',        price: 20,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80',
+    desc: 'Supports focus, memory, and neuroprotection via BDNF and dopamine pathway modulation. Recommended: 200–600mcg per dose, 1–2 times daily, intranasal or subcutaneous, 2–4 week cycle.' },
+  { id: 18, name: 'SLU-PP-332 5mg',   sub: 'ERR Agonist Research Compound',      price: 75,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'ERRα/γ agonist studied for metabolic enhancement, endurance improvement, and fat oxidation. Recommended: 3–5mg per dose, once daily, per research protocol.' },
+  { id: 19, name: 'L-Carnitine 10mg', sub: 'Amino Acid Metabolic Support',       price: 75,   badge: 'Popular', category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80',
+    desc: 'Injectable amino acid supporting fat oxidation, mitochondrial energy production, and post-exercise recovery. Recommended: 500–1000mg per session, intramuscular or slow IV, 3 times weekly.' },
+  { id: 20, name: 'AOD 5mg',          sub: 'AOD-9604 HGH Fragment',              price: 30,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80',
+    desc: 'Modified GH fragment targeting fat metabolism without growth or blood sugar effects. Recommended: 300–500mcg daily fasted, subcutaneous injection, 12+ week cycle.' },
+  { id: 21, name: 'PT-141 10mg',      sub: 'Bremelanotide Peptide',              price: 25,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80',
+    desc: 'Acts on melanocortin receptors to support libido and sexual function in research settings. Recommended: 0.5–2mg per dose, subcutaneous injection, 1–3 times weekly as needed.' },
+  { id: 22, name: 'SS-31 10mg',       sub: 'Mitochondria-Targeted Peptide',      price: 35,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80',
+    desc: 'Mitochondria-targeted antioxidant reducing oxidative stress and supporting cellular energy production. Recommended: 1–5mg per dose, subcutaneous injection, daily or every other day.' },
+  { id: 23, name: 'Thymalin 10mg',    sub: 'Thymic Peptide',                     price: 25,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Thymic peptide supporting immune system regulation and thymus gland function. Recommended: 5–10mg daily, subcutaneous injection, 5–10 day cycles, 2–3 times yearly.' },
+  { id: 24, name: 'KPV 10mg',         sub: 'Anti-Inflammatory Tripeptide',       price: 25,   badge: null,      category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80',
+    desc: 'Alpha-MSH-derived tripeptide studied for gut and skin inflammation reduction. Recommended: 300mcg–1mg daily, subcutaneous injection or oral, 4–6 week cycle.' },
+  { id: 25, name: 'NAD500',           sub: 'NAD+ 500mg',                         price: 50,   badge: 'Popular', category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80',
+    desc: 'NAD+ precursor supporting cellular energy, DNA repair, and longevity pathways. Recommended: 500mg via slow IV push or subcutaneous, 1–3 times weekly.' },
+  { id: 26, name: 'Bac Water 3ml',    sub: 'Bacteriostatic Water for Reconstitution', price: 2.50, badge: null,  category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Sterile bacteriostatic water for reconstituting lyophilised peptide vials. Add 1–2ml per vial, refrigerate after mixing, and use within 28 days.' },
+  { id: 27, name: 'Vitamin S10',      sub: 'Vitamin Blend',                      price: 45,   badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Specialised injectable vitamin support blend for general health and wellbeing. Recommended: As directed by your practitioner, typically 1 vial per session.' },
+  { id: 28, name: 'Vitamin T30',      sub: 'Vitamin B1 30mg',                    price: 90,   badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Thiamine injection supporting nerve function, energy metabolism, and carbohydrate conversion. Recommended: 30mg per dose, intramuscular injection, 1–3 times weekly.' },
+  { id: 29, name: 'Vitamin T60',      sub: 'Vitamin B1 60mg',                    price: 110,  badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'Higher-dose Thiamine injection for enhanced neurological support and metabolic function. Recommended: 60mg per dose, intramuscular injection, 1–3 times weekly.' },
+  { id: 30, name: 'Vitamin T100',     sub: 'Vitamin B1 100mg',                   price: 150,  badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
+    desc: 'High-dose Thiamine injection for therapeutic B1 supplementation and metabolic support. Recommended: 100mg per dose, intramuscular injection, as directed by practitioner.' },
 ];
 
 // ══════════════════════════════════════════
@@ -99,6 +129,7 @@ function showToast(msg, type = '') {
 // ══════════════════════════════════════════
 function buildProductCard(p) {
   const badgeHTML = p.badge ? `<div class="product-badge">${p.badge}</div>` : '';
+  const descHTML  = p.desc  ? `<div class="product-desc">${p.desc}</div>`   : '';
   const variantsHTML = `
     <div class="size-row" id="variants-${p.id}">
       ${p.variants.map((v, i) => `<button class="size-btn${i === 0 ? ' selected' : ''}" data-variant="${v}" onclick="selectVariant(this,${p.id})">${v}</button>`).join('')}
@@ -114,6 +145,7 @@ function buildProductCard(p) {
       <div class="product-info">
         <div class="product-name">${p.name}</div>
         <div class="product-sub">${p.sub}</div>
+        ${descHTML}
         ${variantsHTML}
         <div class="product-price-row">
           <div class="product-price">£${p.price.toFixed(2)}</div>

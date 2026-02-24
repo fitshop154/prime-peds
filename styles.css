@@ -388,7 +388,14 @@ nav {
 .product-sub {
   font-size: 0.8rem;
   color: var(--muted);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.product-desc {
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+  opacity: 0.85;
 }
 .product-price-row {
   display: flex;
