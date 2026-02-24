@@ -222,6 +222,34 @@ function initCheckout() {
   const wrap = document.getElementById('cart-items-wrap');
   if (!wrap) return;
 
+  // Returns selected delivery object or null
+  function getShipOption() {
+    const checked = document.querySelector('input[name="delivery"]:checked');
+    if (!checked) return null;
+    return checked.value === 'special'
+      ? { label: 'Special Delivery', price: 15.00, days: 1 }
+      : { label: 'Tracked 24',       price: 5.00,  days: 2 };
+  }
+
+  // Re-renders just the order summary totals
+  function renderTotals() {
+    const cart    = getCart();
+    const totalsEl = document.getElementById('cart-totals');
+    if (!totalsEl || cart.length === 0) return;
+    const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const ship     = getShipOption();
+    const shipRow  = ship
+      ? `<div class="cart-total-row"><span>${ship.label}</span><span>£${ship.price.toFixed(2)}</span></div>`
+      : `<div class="cart-total-row"><span>Delivery</span><span style="color:var(--muted);font-size:0.8rem">— select option —</span></div>`;
+    const total    = subtotal + (ship ? ship.price : 0);
+    totalsEl.innerHTML = `
+      <div class="cart-totals">
+        <div class="cart-total-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
+        ${shipRow}
+        <div class="cart-total-row grand"><span>Total</span><span>£${total.toFixed(2)}</span></div>
+      </div>`;
+  }
+
   function renderCart() {
     const cart = getCart();
     if (cart.length === 0) {
@@ -235,7 +263,6 @@ function initCheckout() {
       if (totalsEl) totalsEl.innerHTML = '';
       return;
     }
-
     wrap.innerHTML = cart.map(item => `
       <div class="cart-item">
         <img class="cart-item-img" src="${item.img}" alt="${item.name}" onerror="this.style.background='#1a2040'">
@@ -246,21 +273,13 @@ function initCheckout() {
         <div class="cart-item-price">£${(item.price * item.qty).toFixed(2)}</div>
         <button class="cart-item-remove" onclick="removeItem('${item.key}')" aria-label="Remove">×</button>
       </div>`).join('');
-
-    const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const shipping = 5.00;
-    const total    = subtotal + shipping;
-
-    const totalsEl = document.getElementById('cart-totals');
-    if (totalsEl) {
-      totalsEl.innerHTML = `
-        <div class="cart-totals">
-          <div class="cart-total-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
-          <div class="cart-total-row"><span>Tracked 24</span><span>£${shipping.toFixed(2)}</span></div>
-          <div class="cart-total-row grand"><span>Total</span><span>£${total.toFixed(2)}</span></div>
-        </div>`;
-    }
+    renderTotals();
   }
+
+  // Live-update totals when delivery option changes
+  document.querySelectorAll('input[name="delivery"]').forEach(r => {
+    r.addEventListener('change', renderTotals);
+  });
 
   window.removeItem = function (key) {
     removeFromCart(key);
@@ -279,6 +298,13 @@ function initCheckout() {
         return;
       }
 
+      // Must select a delivery method
+      const ship = getShipOption();
+      if (!ship) {
+        showToast('Please select a delivery method.', 'error');
+        return;
+      }
+
       // Grab form values
       const firstName = document.getElementById('first-name').value.trim();
       const lastName  = document.getElementById('last-name').value.trim();
@@ -286,12 +312,12 @@ function initCheckout() {
       const cardRaw   = document.getElementById('card-number').value.replace(/\s/g, '');
       const cardLast4 = cardRaw.slice(-4) || '****';
 
-      // Generate order number & calculate dates
+      // Generate order number & calculate estimated delivery date
       const orderNum  = 'PP-' + Math.random().toString(36).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
       const orderDate = new Date();
       const delivDate = new Date(orderDate);
       let added = 0;
-      while (added < 3) {
+      while (added < ship.days) {
         delivDate.setDate(delivDate.getDate() + 1);
         const d = delivDate.getDay();
         if (d !== 0 && d !== 6) added++;
@@ -301,8 +327,7 @@ function initCheckout() {
 
       // Totals
       const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-      const shipping = 5.00;
-      const total    = subtotal + shipping;
+      const total    = subtotal + ship.price;
 
       // Populate confirmation screen
       document.getElementById('confirm-name').textContent      = firstName + ' ' + lastName;
@@ -324,7 +349,7 @@ function initCheckout() {
 
       document.getElementById('confirm-totals').innerHTML = `
         <div class="cart-total-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
-        <div class="cart-total-row"><span>Tracked 24 Shipping</span><span>£${shipping.toFixed(2)}</span></div>
+        <div class="cart-total-row"><span>${ship.label}</span><span>£${ship.price.toFixed(2)}</span></div>
         <div class="cart-total-row grand"><span>Total Paid</span><span>£${total.toFixed(2)}</span></div>`;
 
       // Clear cart and switch views
