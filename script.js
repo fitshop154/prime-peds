@@ -30,7 +30,10 @@ const PRODUCTS = [
   { id: 24, name: 'KPV 10mg',           sub: 'Anti-Inflammatory Tripeptide',       price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
   { id: 25, name: 'NAD500',             sub: 'NAD+ 500mg',                         price: 50,   badge: 'Popular',   category: 'peptides', variants: ['1 Vial'],   img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
   { id: 26, name: 'Bac Water 3ml',     sub: 'Bacteriostatic Water for Reconstitution', price: 2.50, badge: null,      category: 'peptides', variants: ['1 Vial'],   img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 27, name: 'Sage Vitamin S10',  sub: 'Sage Vitamin Blend',                      price: 45,   badge: null,      category: 'vitamins', variants: ['1 Vial'],   img: 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&h=600&fit=crop&q=80' },
+  { id: 27, name: 'Sage Vitamin S10',    sub: 'Sage Vitamin Blend',        price: 45,  badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&h=600&fit=crop&q=80' },
+  { id: 28, name: 'Thiamine Vitamin T30',  sub: 'Vitamin B1 30mg',        price: 90,  badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&h=600&fit=crop&q=80' },
+  { id: 29, name: 'Thiamine Vitamin T60',  sub: 'Vitamin B1 60mg',        price: 110, badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&h=600&fit=crop&q=80' },
+  { id: 30, name: 'Thiamine Vitamin T100', sub: 'Vitamin B1 100mg',       price: 150, badge: null, category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&h=600&fit=crop&q=80' },
 ];
 
 // ══════════════════════════════════════════
