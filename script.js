@@ -1,4 +1,4 @@
-/* ── Prime Peds Fitness — script.js ── */
+/* ── Prime PEDS Fitness — script.js ── */
 
 // ══════════════════════════════════════════
 // PRODUCT DATA
@@ -372,7 +372,7 @@ function initAgeGate() {
   gate.id = 'age-gate';
   gate.innerHTML = `
     <div class="age-gate-box">
-      <div class="age-gate-logo">Prime<em>Peds</em></div>
+      <div class="age-gate-logo">Prime<em>PEDS</em></div>
       <div class="age-gate-icon">🔞</div>
       <h2>Age Verification Required</h2>
       <p>This website contains research products intended for adults only. You must be 18 years of age or older to enter.</p>
