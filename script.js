@@ -3,7 +3,33 @@
 // ══════════════════════════════════════════
 // PRODUCT DATA
 // ══════════════════════════════════════════
-const PRODUCTS = [];
+const PRODUCTS = [
+  { id: 1,  name: 'BPC-157',       sub: 'Body Protection Compound',          price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
+  { id: 2,  name: 'TB500',         sub: 'Thymosin Beta-4',                    price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
+  { id: 3,  name: 'GHK-Cu',        sub: 'Copper Peptide',                     price: 35,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 4,  name: 'Glow70',        sub: 'Glow Peptide Blend 70mg',            price: 50,  badge: 'Popular',   category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
+  { id: 5,  name: 'IGF-1-LR3',     sub: 'Insulin-like Growth Factor',         price: 50,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
+  { id: 6,  name: 'GHRP-6',        sub: 'Growth Hormone Releasing Peptide 6', price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
+  { id: 7,  name: 'HGH Fragment',  sub: 'HGH Fragment 176-191',               price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
+  { id: 8,  name: 'CJC No DAC',    sub: 'CJC-1295 Without DAC',               price: 35,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 9,  name: 'CJC With DAC',  sub: 'CJC-1295 With DAC',                  price: 45,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
+  { id: 10, name: 'Ipamorelin',    sub: 'GH Secretagogue Peptide',            price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
+  { id: 11, name: 'Tesamorelin',   sub: 'GHRH Analogue Peptide',              price: 60,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
+  { id: 12, name: 'Epithalon',     sub: 'Telomere Peptide',                   price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
+  { id: 13, name: 'MOTS-C10',      sub: 'Mitochondrial Peptide 10mg',         price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 14, name: 'MOTS-C40',      sub: 'Mitochondrial Peptide 40mg',         price: 65,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
+  { id: 15, name: 'DSIP',          sub: 'Delta Sleep-Inducing Peptide',       price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
+  { id: 16, name: 'Selank',        sub: 'Anxiolytic Nootropic Peptide',       price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
+  { id: 17, name: 'Semax',         sub: 'Cognitive Nootropic Peptide',        price: 20,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
+  { id: 18, name: 'SLU-PP-332',    sub: 'ERR Agonist Research Compound',      price: 75,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 19, name: 'L-Carnitine',   sub: 'Amino Acid Metabolic Support',       price: 75,  badge: 'Popular',   category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
+  { id: 20, name: 'AOD',           sub: 'AOD-9604 HGH Fragment',              price: 30,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
+  { id: 21, name: 'PT-141',        sub: 'Bremelanotide Peptide',              price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=600&fit=crop&q=80' },
+  { id: 22, name: 'SS-31',         sub: 'Mitochondria-Targeted Peptide',      price: 35,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=600&fit=crop&q=80' },
+  { id: 23, name: 'Thymalin',      sub: 'Thymic Peptide',                     price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 24, name: 'KPV',           sub: 'Anti-Inflammatory Tripeptide',       price: 25,  badge: null,        category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&q=80' },
+  { id: 25, name: 'NAD500',        sub: 'NAD+ 500mg',                         price: 50,  badge: 'Popular',   category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600&h=600&fit=crop&q=80' },
+];
 
 // ══════════════════════════════════════════
 // CART (localStorage)
