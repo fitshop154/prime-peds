@@ -56,14 +56,10 @@ const PRODUCTS = [
     desc: 'NAD+ precursor supporting cellular energy, DNA repair, and longevity pathways. Recommended: 500mg via slow IV push or subcutaneous, 1–3 times weekly.' },
   { id: 26, name: 'Bac Water 3ml',    sub: 'Bacteriostatic Water for Reconstitution', price: 2.50, badge: null,  category: 'peptides', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
     desc: 'Sterile bacteriostatic water for reconstituting lyophilised peptide vials. Add 1–2ml per vial, refrigerate after mixing, and use within 28 days.' },
-  { id: 27, name: 'Vitamin S10',      sub: 'Vitamin Blend',                      price: 45,   badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
-    desc: 'Specialised injectable vitamin support blend for general health and wellbeing. Recommended: As directed by your practitioner, typically 1 vial per session.' },
-  { id: 28, name: 'Vitamin T30',      sub: 'Vitamin B1 30mg',                    price: 90,   badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
-    desc: 'Thiamine injection supporting nerve function, energy metabolism, and carbohydrate conversion. Recommended: 30mg per dose, intramuscular injection, 1–3 times weekly.' },
-  { id: 29, name: 'Vitamin T60',      sub: 'Vitamin B1 60mg',                    price: 110,  badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
-    desc: 'Higher-dose Thiamine injection for enhanced neurological support and metabolic function. Recommended: 60mg per dose, intramuscular injection, 1–3 times weekly.' },
-  { id: 30, name: 'Vitamin T100',     sub: 'Vitamin B1 100mg',                   price: 150,  badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80',
-    desc: 'High-dose Thiamine injection for therapeutic B1 supplementation and metabolic support. Recommended: 100mg per dose, intramuscular injection, as directed by practitioner.' },
+  { id: 27, name: 'Vitamin S10',      sub: 'Vitamin Blend',                      price: 45,   badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 28, name: 'Vitamin T30',      sub: 'Vitamin B1 30mg',                    price: 90,   badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 29, name: 'Vitamin T60',      sub: 'Vitamin B1 60mg',                    price: 110,  badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 30, name: 'Vitamin T100',     sub: 'Vitamin B1 100mg',                   price: 150,  badge: null,      category: 'vitamins', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
 ];
 
 // ══════════════════════════════════════════
