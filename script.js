@@ -85,7 +85,7 @@ const PRODUCTS = [
   { id: 53, name: 'META 500', sub: '20x30',                   price: 90,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 54, name: 'EZET 10mg', sub: '10x10',               price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 55, name: 'CIASUN 20mg', sub: '10x10',          price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 56, name: 'MENTRO150', sub: '',         price: 27.5, badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 56, name: 'MENTRO150', sub: '150iu',         price: 27.5, badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
 ];
 
 // ══════════════════════════════════════════
