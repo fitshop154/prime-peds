@@ -89,6 +89,7 @@ const PRODUCTS = [
   { id: 57, name: 'TBRO3-25', sub: '10x10',      price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 58, name: 'CLEN40',  sub: '',    price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 59, name: 'MD',  sub: '10mgx30',    price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 60, name: 'Vitamin DAFIL', sub: '', price: 55,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
 ];
 
 // ══════════════════════════════════════════
