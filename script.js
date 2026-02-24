@@ -79,7 +79,7 @@ const PRODUCTS = [
   { id: 47, name: 'INS LAN', sub: '',                                     price: 30,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 48, name: 'CF100',   sub: '',                             price: 45,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
   { id: 49, name: 'AP Jelly', sub: '7 assorted',                   price: 15,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
-  { id: 50, name: 'EXEM 25', sub: '',                      price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
+  { id: 50, name: 'EXEM 25', sub: '25mg 3x10',                      price: 35,   badge: null,      category: 'other', variants: ['1 Vial'], img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=600&fit=crop&q=80' },
 ];
 
 // ══════════════════════════════════════════
