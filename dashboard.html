@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Prime Peds Admin</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0a0a0f;
+      --bg-card:   #111118;
+      --bg-elev:   #16161f;
+      --bg-hover:  #1c1c28;
+      --blue:      #2563eb;
+      --blue-lt:   #3b82f6;
+      --blue-dim:  rgba(37,99,235,0.12);
+      --blue-glow: rgba(37,99,235,0.30);
+      --white:     #ffffff;
+      --text:      #e2e8f0;
+      --muted:     #8b92a5;
+      --border:    rgba(255,255,255,0.07);
+      --green:     #16a34a;
+      --red:       #dc2626;
+      --amber:     #d97706;
+      --radius:    12px;
+      --radius-sm: 8px;
+      --sidebar:   240px;
+      --font:      'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    html, body { height: 100%; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); display: flex; font-size: 14px; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: var(--font); }
+    table { border-collapse: collapse; width: 100%; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    /* ══════════════════════════════
+       SIDEBAR
+    ══════════════════════════════ */
+    .sidebar {
+      width: var(--sidebar);
+      min-height: 100vh;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+    .sidebar-header {
+      padding: 1.4rem 1.2rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.4px;
+    }
+    .sidebar-logo em { font-style: normal; color: var(--blue-lt); }
+    .sidebar-subtitle {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.2rem;
+    }
+    .sidebar-nav { padding: 0.8rem 0.6rem; flex: 1; }
+    .nav-section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.8rem 0.6rem 0.4rem;
+    }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      text-align: left;
+      transition: background 0.18s, color 0.18s;
+      margin-bottom: 2px;
+    }
+    .nav-btn:hover { background: var(--bg-hover); color: var(--text); }
+    .nav-btn.active { background: var(--blue-dim); color: var(--blue-lt); font-weight: 600; }
+    .nav-btn .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-footer {
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      transition: color 0.18s, background 0.18s;
+    }
+    .back-link:hover { color: var(--blue-lt); background: var(--bg-hover); }
+
+    /* ══════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════ */
+    .main {
+      margin-left: var(--sidebar);
+      flex: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      height: 56px;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar-title { font-size: 1rem; font-weight: 700; color: var(--white); }
+    .topbar-meta  { font-size: 0.78rem; color: var(--muted); }
+    .topbar-right { display: flex; align-items: center; gap: 1rem; }
+    .admin-badge {
+      background: var(--blue-dim);
+      border: 1px solid rgba(37,99,235,0.35);
+      color: var(--blue-lt);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    .content { padding: 1.8rem; flex: 1; }
+
+    /* ── Section visibility ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── Page header ── */
+    .page-hd { margin-bottom: 1.6rem; }
+    .page-hd h1 { font-size: 1.5rem; font-weight: 800; color: var(--white); letter-spacing: -0.3px; }
+    .page-hd p  { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ══════════════════════════════
+       STAT CARDS
+    ══════════════════════════════ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.3rem;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .stat-value { font-size: 1.7rem; font-weight: 800; color: var(--white); line-height: 1; }
+    .stat-sub   { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+    .stat-up    { color: var(--green); }
+    .stat-down  { color: var(--red); }
+
+    /* ══════════════════════════════
+       TABLES
+    ══════════════════════════════ */
+    .table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .table-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .table-title { font-size: 0.9rem; font-weight: 700; color: var(--white); }
+    .table-count { font-size: 0.75rem; color: var(--muted); }
+    .tbl { width: 100%; }
+    .tbl th {
+      background: var(--bg-elev);
+      padding: 0.65rem 1rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .tbl td {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tr:hover td { background: var(--bg-hover); }
+    .tbl .mono { font-family: monospace; font-size: 0.8rem; color: var(--muted); }
+
+    /* ── Status badges ── */
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.22rem 0.65rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-green   { background: rgba(22,163,74,0.15);  color: #4ade80; border: 1px solid rgba(22,163,74,0.3); }
+    .badge-blue    { background: var(--blue-dim);        color: var(--blue-lt); border: 1px solid rgba(37,99,235,0.3); }
+    .badge-amber   { background: rgba(217,119,6,0.15);  color: #fbbf24; border: 1px solid rgba(217,119,6,0.3); }
+    .badge-red     { background: rgba(220,38,38,0.15);  color: #f87171; border: 1px solid rgba(220,38,38,0.3); }
+    .badge-muted   { background: rgba(139,146,165,0.12); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ══════════════════════════════
+       P&L CHART
+    ══════════════════════════════ */
+    .pnl-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 1.6rem;
+    }
+    .chart-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.3rem;
+    }
+    .chart-title { font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 1.2rem; }
+    .bar-chart { display: flex; flex-direction: column; gap: 0.75rem; }
+    .bar-row { display: flex; align-items: center; gap: 0.75rem; }
+    .bar-label { font-size: 0.75rem; color: var(--muted); width: 28px; flex-shrink: 0; text-align: right; }
+    .bar-track { flex: 1; height: 22px; background: var(--bg-elev); border-radius: 4px; overflow: hidden; position: relative; }
+    .bar-fill  { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 0.7rem; font-weight: 700; color: #fff; transition: width 0.6s ease; }
+    .bar-revenue { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .bar-cost    { background: linear-gradient(90deg, #dc2626, #ef4444); }
+    .bar-profit  { background: linear-gradient(90deg, #16a34a, #22c55e); }
+    .chart-legend { display: flex; gap: 1.2rem; margin-top: 1rem; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--muted); }
+    .legend-dot  { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+    /* ══════════════════════════════
+       STOCK
+    ══════════════════════════════ */
+    .stock-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .stock-bar-track { width: 80px; height: 6px; background: var(--bg-elev); border-radius: 3px; overflow: hidden; }
+    .stock-bar-fill  { height: 100%; border-radius: 3px; }
+    .stock-high   { background: var(--green); }
+    .stock-mid    { background: var(--amber); }
+    .stock-low    { background: var(--red); }
+
+    /* ══════════════════════════════
+       POPULAR / RANKING
+    ══════════════════════════════ */
+    .rank-num {
+      width: 26px;
+      height: 26px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(37,99,235,0.3);
+      color: var(--blue-lt);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+    .rank-num.gold   { background: rgba(251,191,36,0.15); border-color: rgba(251,191,36,0.4); color: #fbbf24; }
+    .rank-num.silver { background: rgba(148,163,184,0.12); border-color: rgba(148,163,184,0.3); color: #94a3b8; }
+    .rank-num.bronze { background: rgba(180,83,9,0.12); border-color: rgba(180,83,9,0.3); color: #d97706; }
+
+    /* ══════════════════════════════
+       SECURITY
+    ══════════════════════════════ */
+    .sec-event {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .sec-event:last-child { border-bottom: none; }
+    .sec-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .sec-dot-green  { background: var(--green); box-shadow: 0 0 6px rgba(22,163,74,0.5); }
+    .sec-dot-red    { background: var(--red);   box-shadow: 0 0 6px rgba(220,38,38,0.5); }
+    .sec-dot-amber  { background: var(--amber); box-shadow: 0 0 6px rgba(217,119,6,0.5); }
+    .sec-dot-blue   { background: var(--blue);  box-shadow: 0 0 6px var(--blue-glow); }
+    .sec-event-main { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+    .sec-event-meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 900px) {
+      .pnl-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .mob-menu-btn { display: flex; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .mob-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.3rem;
+      padding: 0.25rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════
+       SIDEBAR
+  ══════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">Prime<em>Peds</em></div>
+      <div class="sidebar-subtitle">Admin Dashboard</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <button class="nav-btn active" onclick="showSection('orders', this)">
+        <span class="nav-icon">📦</span> Orders
+      </button>
+      <button class="nav-btn" onclick="showSection('pnl', this)">
+        <span class="nav-icon">📊</span> P&amp;L
+      </button>
+
+      <div class="nav-section-label">Inventory</div>
+      <button class="nav-btn" onclick="showSection('stock', this)">
+        <span class="nav-icon">🗃️</span> Stock
+      </button>
+      <button class="nav-btn" onclick="showSection('products', this)">
+        <span class="nav-icon">💊</span> Products
+      </button>
+
+      <div class="nav-section-label">People</div>
+      <button class="nav-btn" onclick="showSection('customers', this)">
+        <span class="nav-icon">👥</span> Customers
+      </button>
+      <button class="nav-btn" onclick="showSection('popular', this)">
+        <span class="nav-icon">🏆</span> Popular
+      </button>
+
+      <div class="nav-section-label">System</div>
+      <button class="nav-btn" onclick="showSection('security', this)">
+        <span class="nav-icon">🔒</span> Security
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="index.html" class="back-link">← Back to Website</a>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════
+       MAIN
+  ══════════════════════════════ -->
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <button class="mob-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+        <div>
+          <div class="topbar-title" id="topbar-title">Orders</div>
+          <div class="topbar-meta" id="topbar-meta">Showing all recent orders</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span id="live-time" style="font-size:0.78rem;color:var(--muted)"></span>
+        <span class="admin-badge">Admin</span>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ══════════════════════════════
+           ORDERS
+      ══════════════════════════════ -->
+      <div class="section active" id="section-orders">
+        <div class="page-hd">
+          <h1>📦 Orders</h1>
+          <p>All customer orders — most recent first</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-value">47</div>
+            <div class="stat-sub stat-up">↑ 12 this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Pending</div>
+            <div class="stat-value" style="color:#fbbf24">8</div>
+            <div class="stat-sub">Awaiting dispatch</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Shipped</div>
+            <div class="stat-value" style="color:var(--blue-lt)">11</div>
+            <div class="stat-sub">In transit</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Delivered</div>
+            <div class="stat-value" style="color:#4ade80">28</div>
+            <div class="stat-sub">Completed</div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-header">
+            <span class="table-title">Recent Orders</span>
+            <span class="table-count">Showing 12 of 47</span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Customer</th>
+                <th>Products</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="mono">ORD-047</td><td>Isla Roberts</td><td>NAD500 x2, Bac Water 3ml x2</td><td>£105.00</td><td><span class="badge badge-amber">Pending</span></td><td>24 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-046</td><td>Daniel Evans</td><td>CJC With DAC 5mg x2</td><td>£90.00</td><td><span class="badge badge-amber">Pending</span></td><td>23 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-045</td><td>Charlotte Hughes</td><td>Selank 5mg, Semax 5mg</td><td>£45.00</td><td><span class="badge badge-blue">Shipped</span></td><td>22 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-044</td><td>Oliver Martin</td><td>Tesamorelin 10mg x1</td><td>£65.00</td><td><span class="badge badge-green">Delivered</span></td><td>21 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-043</td><td>Sophie Turner</td><td>Epithalon 10mg, KPV 10mg</td><td>£60.00</td><td><span class="badge badge-green">Delivered</span></td><td>20 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-042</td><td>James Clarke</td><td>BPC-157 5mg x3</td><td>£65.00</td><td><span class="badge badge-blue">Shipped</span></td><td>19 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-041</td><td>Laura Wilson</td><td>Vitamin T60 x1</td><td>£110.00</td><td><span class="badge badge-amber">Pending</span></td><td>18 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-040</td><td>Ryan Thompson</td><td>GHRP-6 5mg, Ipamorelin 10mg</td><td>£55.00</td><td><span class="badge badge-green">Delivered</span></td><td>17 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-039</td><td>Emma Davis</td><td>IGF-1-LR3 1mg x2</td><td>£105.00</td><td><span class="badge badge-blue">Shipped</span></td><td>16 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-038</td><td>John Smith</td><td>BPC-157 5mg, TB500 5mg</td><td>£50.00</td><td><span class="badge badge-green">Delivered</span></td><td>15 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-037</td><td>Priya Patel</td><td>GHK-Cu 50mg, SS-31 10mg</td><td>£75.00</td><td><span class="badge badge-green">Delivered</span></td><td>14 Feb 2026</td></tr>
+              <tr><td class="mono">ORD-036</td><td>Marcus Brown</td><td>PT-141 10mg, AOD 5mg</td><td>£60.00</td><td><span class="badge badge-blue">Shipped</span></td><td>13 Feb 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           P&L
+      ══════════════════════════════ -->
+      <div class="section" id="section-pnl">
+        <div class="page-hd">
+          <h1>📊 Profit &amp; Loss</h1>
+          <p>Monthly revenue, costs, and profit summary</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value">£8,420</div>
+            <div class="stat-sub stat-up">↑ 18% vs last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Costs</div>
+            <div class="stat-value" style="color:#f87171">£3,368</div>
+            <div class="stat-sub">Cost of goods + shipping</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Net Profit</div>
+            <div class="stat-value" style="color:#4ade80">£5,052</div>
+            <div class="stat-sub stat-up">↑ 60% margin</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg Order Value</div>
+            <div class="stat-value">£71.40</div>
+            <div class="stat-sub stat-up">↑ £6 vs last month</div>
+          </div>
+        </div>
+
+        <div class="pnl-grid">
+          <div class="chart-wrap">
+            <div class="chart-title">Monthly Revenue (£)</div>
+            <div class="bar-chart">
+              <div class="bar-row"><span class="bar-label">Sep</span><div class="bar-track"><div class="bar-fill bar-revenue" style="width:42%">£840</div></div></div>
+              <div class="bar-row"><span class="bar-label">Oct</span><div class="bar-track"><div class="bar-fill bar-revenue" style="width:55%">£1,100</div></div></div>
+              <div class="bar-row"><span class="bar-label">Nov</span><div class="bar-track"><div class="bar-fill bar-revenue" style="width:60%">£1,200</div></div></div>
+              <div class="bar-row"><span class="bar-label">Dec</span><div class="bar-track"><div class="bar-fill bar-revenue" style="width:68%">£1,360</div></div></div>
+              <div class="bar-row"><span class="bar-label">Jan</span><div class="bar-track"><div class="bar-fill bar-revenue" style="width:79%">£1,580</div></div></div>
+              <div class="bar-row"><span class="bar-label">Feb</span><div class="bar-track"><div class="bar-fill bar-revenue" style="width:100%">£2,340</div></div></div>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <div class="chart-title">Monthly Profit (£)</div>
+            <div class="bar-chart">
+              <div class="bar-row"><span class="bar-label">Sep</span><div class="bar-track"><div class="bar-fill bar-profit" style="width:38%">£504</div></div></div>
+              <div class="bar-row"><span class="bar-label">Oct</span><div class="bar-track"><div class="bar-fill bar-profit" style="width:51%">£660</div></div></div>
+              <div class="bar-row"><span class="bar-label">Nov</span><div class="bar-track"><div class="bar-fill bar-profit" style="width:56%">£720</div></div></div>
+              <div class="bar-row"><span class="bar-label">Dec</span><div class="bar-track"><div class="bar-fill bar-profit" style="width:63%">£816</div></div></div>
+              <div class="bar-row"><span class="bar-label">Jan</span><div class="bar-track"><div class="bar-fill bar-profit" style="width:78%">£948</div></div></div>
+              <div class="bar-row"><span class="bar-label">Feb</span><div class="bar-track"><div class="bar-fill bar-profit" style="width:100%">£1,404</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-header">
+            <span class="table-title">Monthly Breakdown</span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr><th>Month</th><th>Orders</th><th>Revenue</th><th>Costs</th><th>Profit</th><th>Margin</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>February 2026</td><td>47</td><td>£2,340</td><td>£936</td><td style="color:#4ade80">£1,404</td><td><span class="badge badge-green">60%</span></td></tr>
+              <tr><td>January 2026</td><td>38</td><td>£1,580</td><td>£632</td><td style="color:#4ade80">£948</td><td><span class="badge badge-green">60%</span></td></tr>
+              <tr><td>December 2025</td><td>32</td><td>£1,360</td><td>£544</td><td style="color:#4ade80">£816</td><td><span class="badge badge-green">60%</span></td></tr>
+              <tr><td>November 2025</td><td>28</td><td>£1,200</td><td>£480</td><td style="color:#4ade80">£720</td><td><span class="badge badge-green">60%</span></td></tr>
+              <tr><td>October 2025</td><td>24</td><td>£1,100</td><td>£440</td><td style="color:#4ade80">£660</td><td><span class="badge badge-green">60%</span></td></tr>
+              <tr><td>September 2025</td><td>18</td><td>£840</td><td>£336</td><td style="color:#4ade80">£504</td><td><span class="badge badge-green">60%</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           STOCK
+      ══════════════════════════════ -->
+      <div class="section" id="section-stock">
+        <div class="page-hd">
+          <h1>🗃️ Stock</h1>
+          <p>Current inventory levels across all products</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Products</div>
+            <div class="stat-value">30</div>
+            <div class="stat-sub">Active listings</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Low Stock</div>
+            <div class="stat-value" style="color:#fbbf24">5</div>
+            <div class="stat-sub">Below 10 units</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Out of Stock</div>
+            <div class="stat-value" style="color:#f87171">2</div>
+            <div class="stat-sub">Needs restocking</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Well Stocked</div>
+            <div class="stat-value" style="color:#4ade80">23</div>
+            <div class="stat-sub">Above 10 units</div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-header">
+            <span class="table-title">Inventory Levels</span>
+            <span class="table-count">All products</span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr><th>Product</th><th>Category</th><th>Stock</th><th>Level</th><th>Status</th></tr>
+            </thead>
+            <tbody id="stock-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           CUSTOMERS
+      ══════════════════════════════ -->
+      <div class="section" id="section-customers">
+        <div class="page-hd">
+          <h1>👥 Customers</h1>
+          <p>All registered customers and their order history</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Customers</div>
+            <div class="stat-value">34</div>
+            <div class="stat-sub stat-up">↑ 8 this month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Repeat Customers</div>
+            <div class="stat-value">19</div>
+            <div class="stat-sub">56% retention rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg Spend</div>
+            <div class="stat-value">£148</div>
+            <div class="stat-sub stat-up">↑ £12 vs last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Top Spender</div>
+            <div class="stat-value">£620</div>
+            <div class="stat-sub">Emma Davis</div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-header">
+            <span class="table-title">Customer List</span>
+            <span class="table-count">Showing top 12</span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr><th>#</th><th>Name</th><th>Email</th><th>Orders</th><th>Total Spent</th><th>Last Order</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="mono">C-001</td><td>Emma Davis</td><td>emma.davis@email.com</td><td>9</td><td style="color:var(--blue-lt)">£620.00</td><td>23 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-002</td><td>James Clarke</td><td>james.clarke@email.com</td><td>7</td><td style="color:var(--blue-lt)">£490.00</td><td>19 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-003</td><td>Priya Patel</td><td>priya.patel@email.com</td><td>6</td><td style="color:var(--blue-lt)">£415.00</td><td>14 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-004</td><td>John Smith</td><td>john.smith@email.com</td><td>5</td><td style="color:var(--blue-lt)">£310.00</td><td>15 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-005</td><td>Oliver Martin</td><td>oliver.martin@email.com</td><td>5</td><td style="color:var(--blue-lt)">£295.00</td><td>21 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-006</td><td>Sophie Turner</td><td>sophie.turner@email.com</td><td>4</td><td style="color:var(--blue-lt)">£240.00</td><td>20 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-007</td><td>Ryan Thompson</td><td>ryan.t@email.com</td><td>4</td><td style="color:var(--blue-lt)">£220.00</td><td>17 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-008</td><td>Charlotte Hughes</td><td>c.hughes@email.com</td><td>3</td><td style="color:var(--blue-lt)">£185.00</td><td>22 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-009</td><td>Marcus Brown</td><td>marcus.b@email.com</td><td>3</td><td style="color:var(--blue-lt)">£175.00</td><td>13 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-010</td><td>Laura Wilson</td><td>laura.w@email.com</td><td>2</td><td style="color:var(--blue-lt)">£145.00</td><td>18 Feb 2026</td><td><span class="badge badge-green">Active</span></td></tr>
+              <tr><td class="mono">C-011</td><td>Daniel Evans</td><td>d.evans@email.com</td><td>2</td><td style="color:var(--blue-lt)">£130.00</td><td>23 Feb 2026</td><td><span class="badge badge-amber">New</span></td></tr>
+              <tr><td class="mono">C-012</td><td>Isla Roberts</td><td>isla.r@email.com</td><td>1</td><td style="color:var(--blue-lt)">£105.00</td><td>24 Feb 2026</td><td><span class="badge badge-amber">New</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           PRODUCTS
+      ══════════════════════════════ -->
+      <div class="section" id="section-products">
+        <div class="page-hd">
+          <h1>💊 Products</h1>
+          <p>Full product catalogue with prices and stock</p>
+        </div>
+        <div class="table-wrap">
+          <div class="table-header">
+            <span class="table-title">All Products</span>
+            <span class="table-count" id="products-count"></span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr><th>ID</th><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th></tr>
+            </thead>
+            <tbody id="products-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           POPULAR
+      ══════════════════════════════ -->
+      <div class="section" id="section-popular">
+        <div class="page-hd">
+          <h1>🏆 Popular Products</h1>
+          <p>Top selling products ranked by number of orders</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Best Seller</div>
+            <div class="stat-value" style="font-size:1.1rem;padding-top:0.2rem">BPC-157 5mg</div>
+            <div class="stat-sub">24 orders this month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Fastest Growing</div>
+            <div class="stat-value" style="font-size:1.1rem;padding-top:0.2rem">NAD500</div>
+            <div class="stat-sub stat-up">↑ 180% this month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Highest Revenue</div>
+            <div class="stat-value" style="font-size:1.1rem;padding-top:0.2rem">Vitamin T100</div>
+            <div class="stat-sub">£1,050 total</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Most Bundled</div>
+            <div class="stat-value" style="font-size:1.1rem;padding-top:0.2rem">Bac Water</div>
+            <div class="stat-sub">Added to 68% of orders</div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-header">
+            <span class="table-title">Top 15 Products by Orders</span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr><th>Rank</th><th>Product</th><th>Orders</th><th>Revenue</th><th>Trend</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="rank-num gold">1</span></td><td>BPC-157 5mg</td><td>24</td><td>£480</td><td class="stat-up">↑ +8</td></tr>
+              <tr><td><span class="rank-num silver">2</span></td><td>NAD500</td><td>21</td><td>£1,050</td><td class="stat-up">↑ +13</td></tr>
+              <tr><td><span class="rank-num bronze">3</span></td><td>TB500 5mg</td><td>18</td><td>£450</td><td class="stat-up">↑ +5</td></tr>
+              <tr><td><span class="rank-num">4</span></td><td>Bac Water 3ml</td><td>17</td><td>£42.50</td><td class="stat-up">↑ +9</td></tr>
+              <tr><td><span class="rank-num">5</span></td><td>IGF-1-LR3 1mg</td><td>15</td><td>£750</td><td class="stat-up">↑ +4</td></tr>
+              <tr><td><span class="rank-num">6</span></td><td>Ipamorelin 10mg</td><td>14</td><td>£420</td><td class="stat-up">↑ +3</td></tr>
+              <tr><td><span class="rank-num">7</span></td><td>Epithalon 10mg</td><td>13</td><td>£390</td><td style="color:var(--muted)">→ 0</td></tr>
+              <tr><td><span class="rank-num">8</span></td><td>GHK-Cu 50mg</td><td>12</td><td>£420</td><td class="stat-up">↑ +2</td></tr>
+              <tr><td><span class="rank-num">9</span></td><td>CJC No DAC 5mg</td><td>11</td><td>£385</td><td style="color:var(--muted)">→ 0</td></tr>
+              <tr><td><span class="rank-num">10</span></td><td>Vitamin T60</td><td>10</td><td>£1,100</td><td class="stat-up">↑ +6</td></tr>
+              <tr><td><span class="rank-num">11</span></td><td>Tesamorelin 10mg</td><td>9</td><td>£540</td><td class="stat-up">↑ +2</td></tr>
+              <tr><td><span class="rank-num">12</span></td><td>GHRP-6 5mg</td><td>9</td><td>£180</td><td style="color:var(--muted)">→ 0</td></tr>
+              <tr><td><span class="rank-num">13</span></td><td>PT-141 10mg</td><td>8</td><td>£200</td><td class="stat-up">↑ +1</td></tr>
+              <tr><td><span class="rank-num">14</span></td><td>KPV 10mg</td><td>7</td><td>£175</td><td class="stat-down">↓ -1</td></tr>
+              <tr><td><span class="rank-num">15</span></td><td>SS-31 10mg</td><td>7</td><td>£245</td><td style="color:var(--muted)">→ 0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           SECURITY
+      ══════════════════════════════ -->
+      <div class="section" id="section-security">
+        <div class="page-hd">
+          <h1>🔒 Security</h1>
+          <p>Login activity, access logs, and security events</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Logins (30d)</div>
+            <div class="stat-value">38</div>
+            <div class="stat-sub">All successful</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Failed Attempts</div>
+            <div class="stat-value" style="color:#fbbf24">3</div>
+            <div class="stat-sub">Last: 19 Feb 2026</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Blocked IPs</div>
+            <div class="stat-value" style="color:#f87171">1</div>
+            <div class="stat-sub">Auto-blocked</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Last Login</div>
+            <div class="stat-value" style="font-size:1rem;padding-top:0.3rem">Today</div>
+            <div class="stat-sub">24 Feb 2026, 09:14</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+
+          <div class="table-wrap">
+            <div class="table-header">
+              <span class="table-title">Recent Login Activity</span>
+            </div>
+            <div style="padding:0.5rem 1.25rem">
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-green"></div>
+                <div><div class="sec-event-main">Admin login successful</div><div class="sec-event-meta">24 Feb 2026, 09:14 · IP: 82.45.112.34 · Chrome / macOS</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-green"></div>
+                <div><div class="sec-event-main">Admin login successful</div><div class="sec-event-meta">23 Feb 2026, 18:42 · IP: 82.45.112.34 · Chrome / macOS</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-green"></div>
+                <div><div class="sec-event-main">Admin login successful</div><div class="sec-event-meta">22 Feb 2026, 11:05 · IP: 82.45.112.34 · Safari / iPhone</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-green"></div>
+                <div><div class="sec-event-main">Admin login successful</div><div class="sec-event-meta">21 Feb 2026, 14:30 · IP: 82.45.112.34 · Chrome / macOS</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-green"></div>
+                <div><div class="sec-event-main">Admin login successful</div><div class="sec-event-meta">20 Feb 2026, 09:55 · IP: 82.45.112.34 · Chrome / macOS</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <div class="table-header">
+              <span class="table-title">Failed Attempts &amp; Alerts</span>
+            </div>
+            <div style="padding:0.5rem 1.25rem">
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-red"></div>
+                <div><div class="sec-event-main">Failed login attempt</div><div class="sec-event-meta">19 Feb 2026, 03:22 · IP: 194.165.16.11 · Unknown browser</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-red"></div>
+                <div><div class="sec-event-main">Failed login attempt</div><div class="sec-event-meta">19 Feb 2026, 03:21 · IP: 194.165.16.11 · Unknown browser</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-red"></div>
+                <div><div class="sec-event-main">Failed login attempt — IP blocked</div><div class="sec-event-meta">19 Feb 2026, 03:20 · IP: 194.165.16.11 · Auto-blocked after 3 attempts</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-amber"></div>
+                <div><div class="sec-event-main">New device login detected</div><div class="sec-event-meta">22 Feb 2026, 11:05 · Safari / iPhone — first time this device</div></div>
+              </div>
+              <div class="sec-event">
+                <div class="sec-dot sec-dot-blue"></div>
+                <div><div class="sec-event-main">Dashboard accessed</div><div class="sec-event-meta">24 Feb 2026, 09:14 · Orders, Stock, P&amp;L sections viewed</div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="table-wrap" style="margin-top:1.2rem">
+          <div class="table-header">
+            <span class="table-title">Admin Access Log</span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr><th>Date &amp; Time</th><th>Section</th><th>Action</th><th>IP Address</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>24 Feb 2026, 09:18</td><td>Stock</td><td>Viewed inventory</td><td class="mono">82.45.112.34</td></tr>
+              <tr><td>24 Feb 2026, 09:16</td><td>Orders</td><td>Viewed order ORD-047</td><td class="mono">82.45.112.34</td></tr>
+              <tr><td>24 Feb 2026, 09:14</td><td>Login</td><td>Authenticated</td><td class="mono">82.45.112.34</td></tr>
+              <tr><td>23 Feb 2026, 18:50</td><td>Products</td><td>Viewed product list</td><td class="mono">82.45.112.34</td></tr>
+              <tr><td>23 Feb 2026, 18:45</td><td>P&amp;L</td><td>Viewed P&amp;L report</td><td class="mono">82.45.112.34</td></tr>
+              <tr><td>23 Feb 2026, 18:42</td><td>Login</td><td>Authenticated</td><td class="mono">82.45.112.34</td></tr>
+              <tr><td>22 Feb 2026, 11:10</td><td>Customers</td><td>Viewed customer list</td><td class="mono">82.45.112.34</td></tr>
+              <tr><td>22 Feb 2026, 11:05</td><td>Login</td><td>Authenticated (new device)</td><td class="mono">82.45.112.34</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+
+  <script>
+    // ── Live clock ──
+    function updateTime() {
+      var now = new Date();
+      document.getElementById('live-time').textContent =
+        now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }) + '  ' +
+        now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+    }
+    updateTime();
+    setInterval(updateTime, 30000);
+
+    // ── Section switching ──
+    var titles = {
+      orders:    ['Orders',   'Showing all recent orders'],
+      pnl:       ['P&L',      'Revenue, costs and profit summary'],
+      stock:     ['Stock',    'Current inventory levels'],
+      products:  ['Products', 'Full product catalogue'],
+      customers: ['Customers','All customer accounts'],
+      popular:   ['Popular',  'Top selling products by order volume'],
+      security:  ['Security', 'Login activity and access logs']
+    };
+
+    function showSection(id, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('section-' + id).classList.add('active');
+      if (btn) btn.classList.add('active');
+      document.getElementById('topbar-title').textContent = titles[id][0];
+      document.getElementById('topbar-meta').textContent  = titles[id][1];
+      // Close mobile sidebar
+      document.getElementById('sidebar').classList.remove('open');
+    }
+
+    // ── Product data (synced from script.js manually) ──
+    var STOCK = {
+      1:18, 2:25, 3:12, 4:6, 5:20, 6:15, 7:8, 8:22, 9:14, 10:19,
+      11:9, 12:17, 13:11, 14:0, 15:16, 16:13, 17:13, 18:7, 19:5,
+      20:21, 21:10, 22:14, 23:18, 24:20, 25:11, 26:45, 27:8, 28:4, 29:6, 30:0
+    };
+
+    var PDATA = [
+      {id:1,  name:'BPC-157 5mg',         cat:'Peptides', price:20},
+      {id:2,  name:'TB500 5mg',           cat:'Peptides', price:25},
+      {id:3,  name:'GHK-Cu 50mg',         cat:'Peptides', price:35},
+      {id:4,  name:'Glow70',              cat:'Peptides', price:50},
+      {id:5,  name:'IGF-1-LR3 1mg',       cat:'Peptides', price:50},
+      {id:6,  name:'GHRP-6 5mg',          cat:'Peptides', price:20},
+      {id:7,  name:'HGH Fragment 5mg',    cat:'Peptides', price:25},
+      {id:8,  name:'CJC No DAC 5mg',      cat:'Peptides', price:35},
+      {id:9,  name:'CJC With DAC 5mg',    cat:'Peptides', price:45},
+      {id:10, name:'Ipamorelin 10mg',     cat:'Peptides', price:30},
+      {id:11, name:'Tesamorelin 10mg',    cat:'Peptides', price:60},
+      {id:12, name:'Epithalon 10mg',      cat:'Peptides', price:30},
+      {id:13, name:'MOTS-C10 10mg',       cat:'Peptides', price:25},
+      {id:14, name:'MOTS-C40 40mg',       cat:'Peptides', price:65},
+      {id:15, name:'DSIP 5mg',            cat:'Peptides', price:30},
+      {id:16, name:'Selank 5mg',          cat:'Peptides', price:20},
+      {id:17, name:'Semax 5mg',           cat:'Peptides', price:20},
+      {id:18, name:'SLU-PP-332 5mg',      cat:'Peptides', price:75},
+      {id:19, name:'L-Carnitine 10mg',    cat:'Peptides', price:75},
+      {id:20, name:'AOD 5mg',             cat:'Peptides', price:30},
+      {id:21, name:'PT-141 10mg',         cat:'Peptides', price:25},
+      {id:22, name:'SS-31 10mg',          cat:'Peptides', price:35},
+      {id:23, name:'Thymalin 10mg',       cat:'Peptides', price:25},
+      {id:24, name:'KPV 10mg',            cat:'Peptides', price:25},
+      {id:25, name:'NAD500',              cat:'Peptides', price:50},
+      {id:26, name:'Bac Water 3ml',       cat:'Peptides', price:2.50},
+      {id:27, name:'Vitamin S10',         cat:'Vitamins', price:45},
+      {id:28, name:'Vitamin T30',         cat:'Vitamins', price:90},
+      {id:29, name:'Vitamin T60',         cat:'Vitamins', price:110},
+      {id:30, name:'Vitamin T100',        cat:'Vitamins', price:150}
+    ];
+
+    function stockBar(qty) {
+      var pct = Math.min(qty / 30 * 100, 100);
+      var cls = qty === 0 ? 'stock-low' : qty < 8 ? 'stock-low' : qty < 15 ? 'stock-mid' : 'stock-high';
+      return '<div class="stock-indicator">' +
+        '<span style="min-width:28px;font-weight:700;color:' + (qty===0?'#f87171':qty<8?'#fbbf24':'#4ade80') + '">' + qty + '</span>' +
+        '<div class="stock-bar-track"><div class="stock-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div>' +
+        '</div>';
+    }
+    function stockBadge(qty) {
+      if (qty === 0) return '<span class="badge badge-red">Out of Stock</span>';
+      if (qty < 8)   return '<span class="badge badge-amber">Low Stock</span>';
+      return '<span class="badge badge-green">In Stock</span>';
+    }
+
+    // Build stock table
+    var stockBody = document.getElementById('stock-table-body');
+    PDATA.forEach(function(p) {
+      var q = STOCK[p.id] || 0;
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + p.name + '</td>' +
+        '<td><span class="badge badge-muted">' + p.cat + '</span></td>' +
+        '<td>' + stockBar(q) + '</td>' +
+        '<td>' + q + ' units</td>' +
+        '<td>' + stockBadge(q) + '</td>';
+      stockBody.appendChild(tr);
+    });
+
+    // Build products table
+    var prodBody = document.getElementById('products-table-body');
+    document.getElementById('products-count').textContent = PDATA.length + ' products';
+    PDATA.forEach(function(p) {
+      var q = STOCK[p.id] || 0;
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td class="mono">#' + p.id + '</td>' +
+        '<td style="font-weight:600;color:var(--white)">' + p.name + '</td>' +
+        '<td><span class="badge badge-muted">' + p.cat + '</span></td>' +
+        '<td style="color:var(--blue-lt);font-weight:700">£' + p.price.toFixed(2) + '</td>' +
+        '<td>' + q + '</td>' +
+        '<td>' + stockBadge(q) + '</td>';
+      prodBody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>
