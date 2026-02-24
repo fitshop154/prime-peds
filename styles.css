@@ -784,6 +784,73 @@ footer {
 }
 
 /* ══════════════════════════════════════════
+   TELEGRAM BANNER
+══════════════════════════════════════════ */
+.telegram-banner {
+  background: linear-gradient(135deg, rgba(42,171,238,0.14) 0%, rgba(37,99,235,0.08) 100%);
+  border-top: 1px solid rgba(42,171,238,0.28);
+  border-bottom: 1px solid rgba(42,171,238,0.28);
+  padding: 1.1rem 1.5rem;
+}
+.telegram-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.telegram-banner-icon { font-size: 1.9rem; flex-shrink: 0; }
+.telegram-banner-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.12rem;
+}
+.telegram-banner-sub { font-size: 0.81rem; color: var(--muted); }
+.telegram-btn {
+  margin-left: auto;
+  background: #2AABEE;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(42,171,238,0.30);
+  flex-shrink: 0;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.92rem;
+}
+.telegram-btn:hover {
+  background: #1d9de0;
+  box-shadow: 0 6px 24px rgba(42,171,238,0.45);
+  transform: translateY(-2px);
+}
+
+/* Social button in footer */
+.social-links { display: flex; gap: 0.6rem; margin-top: 1rem; flex-wrap: wrap; }
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.85rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid rgba(42,171,238,0.35);
+  background: rgba(42,171,238,0.10);
+  color: #2AABEE;
+  transition: var(--transition);
+}
+.social-btn:hover {
+  background: rgba(42,171,238,0.22);
+  border-color: #2AABEE;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+  .telegram-banner-inner { gap: 0.8rem; }
+  .telegram-btn { width: 100%; justify-content: center; margin-left: 0; }
+}
+
+/* ══════════════════════════════════════════
    TOAST NOTIFICATION
 ══════════════════════════════════════════ */
 .toast-container {
